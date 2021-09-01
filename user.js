@@ -14,6 +14,7 @@ class User{
     addsGift(gift){
         this.gifted.push(gift)
         gift.giftedOn = new Date()
+        gift.giftedBy = this.name
     }
 
     showsInterest(gift){
@@ -22,17 +23,36 @@ class User{
     }
 
     makesCommentOn(gift, comment){
-        this.commentedOn.push({ name: gift.name, comment : comment })
-        gift.commentedBy.push({name: this.name, comment: comment })
+        this.commentedOn.push( { gift , comment })
+        gift.commentedBy.push( { user : this , comment })
     }
 
     takesThat(gift){
         gift.takenBy = this
         gift.takenOn = new Date()
-        this.tookThat.push({ name: gift.name, date : gift.takenOn })
+        this.tookThat.push(gift)
     }
+
+    get profile() {
+        return `${this.name} ${this.birthYear}\n` + 
+                `## Gifts: (${this.gifted.length})\n` +
+                    `${this.gifted.map(gift => {
+                        return  `#### "${gift.name}" taken by ${gift.takenBy.name}`}).join("\n")}\n` +
+                `## Interested (${this.interestedIn.length}) gifts\n` +
+                    `${this.interestedIn.map(gift => {
+                        return  `#### ${gift.name} also 💛 by ${gift.interestedBy.map(user => user.name).join(', ')}`}).join("\n")}\n` +
+                `## Commented (${this.commentedOn.length}) times\n` +
+                    `${this.commentedOn.map(({gift, comment}) => {
+                        return  `#### ${gift.name} 💬 "${comment}"`}).join('\n')}\n` +
+                `## Took (${this.tookThat.length})\n` +
+                    `${this.tookThat.map(gift => {
+                        return  `#### "${gift.name}" gifted by ${gift.giftedBy}`}).join("\n")}\n`
+    }
+
+    set profile(newValue){
+        throw new Error('profile is only a getter.. you cant override it with ${newValue}')
+    }
+
 }
-
-
 
 module.exports = User
