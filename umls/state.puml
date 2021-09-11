@@ -1,0 +1,22 @@
+@startuml
+
+CreateGift: define
+PostGift: 
+Search: User browse
+Interest:
+Comment:
+Pickup:
+
+[*] -> CreateGift: Miracle
+CreateGift --> PostGift: Created
+CreateGift --> [*]: Cancelled
+PostGift --> Search: Posted
+PostGift --> [*]: Cancelled
+
+Search --> Interest: Interested in
+Search --> Comment: Comment on
+Search --> Pickup: Decide to take
+Search --> [*]: Perished
+Pickup --> [*]: Succeed
+
+@enduml

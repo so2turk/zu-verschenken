@@ -1,0 +1,31 @@
+@startuml
+title Activity Diagram of zuV
+
+|#yellow|login page|
+    start
+    if (login?) then (no)
+    else (yes)
+        if (account?) then (yes)
+        :login;
+        else (no)
+|signup page|
+        :creat account;
+        endif
+|home page|
+    endif
+    if (create gift) then (yes)
+|create page|
+        :create gift;
+    else (search gift)
+|search page|
+        :search gift;
+    endif
+
+    if (gift accepted) then (yes)
+    :lolo;
+    else (no)
+    :lol;
+    endif
+    stop
+
+@enduml

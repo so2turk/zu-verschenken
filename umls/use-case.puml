@@ -1,0 +1,31 @@
+@startuml
+
+left to right direction
+
+actor "Subscribed User" as subscribed
+actor "Non-Subscribed User" as unsubscribed
+
+package "Gift" {
+  usecase "Present" as UC1
+  usecase "Search" as UC2
+  usecase "Like" as UC3
+  usecase "Comment" as UC4
+  usecase "Status update" as UC5
+}
+
+package "Profile" {
+  usecase "Create notification" as UC6
+  usecase "Data analysis" as UC7
+}
+
+subscribed --> UC1
+subscribed --> UC2
+subscribed --> UC3
+subscribed --> UC4
+subscribed --> UC5
+subscribed --> UC6
+subscribed --> UC7
+unsubscribed ---> UC2
+
+
+@enduml
