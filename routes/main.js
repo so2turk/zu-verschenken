@@ -1,3 +1,6 @@
+var express = require('express')
+var router = express.Router()
+
 const User = require('./user')
 const Gift = require('./gift')
 
@@ -89,7 +92,39 @@ ceyhan.accept(painting)
 ceyhan.makeCommentOn(painting, 'beautiful.. thank u..')
 lamp.anonymous()
 
-console.log(serhat.profile)
-console.log(toys.profile)
-console.log(desire.profile)
-console.log(backPack.profile)
+/*
+console.log(serhat.profile);
+console.log(toys.profile);
+console.log(desire.profile);
+console.log(backPack.profile);
+*/
+
+function getValue(obj) {
+  var regex = /^[\w$][\w.]+$/,
+    value
+  if (regex.test(obj)) {
+    try {
+      value = eval(obj)
+    } catch (error) {
+      throw new Error('Could not get value of ' + obj + ' (' + error.message + ')')
+    }
+  } else {
+    throw new Error('Could not get value of ' + obj)
+  }
+
+  return value
+}
+
+router.get('/', (req, res, next) => {
+  res.render('main', { title: 'zu Verschenken' })
+})
+
+/* GET users listing. */
+
+router.get('/:obj', (req, res, next) => {
+  const user = getValue(req.params.obj)
+  if (user) res.send(user.profile)
+  else res.sendStatus(404)
+})
+
+module.exports = router

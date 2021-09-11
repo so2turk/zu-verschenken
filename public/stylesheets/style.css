@@ -1,0 +1,27 @@
+body {
+  padding: 50px;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: red;
+}
+
+h3 {
+  color: blue;
+}
+
+.gift-box {
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 8px;
+  color: aliceblue;
+  padding: 8px;
+  margin: 6px;
+}
+
+.photo-box {
+  height: 150px;
+  width: 250px;
+  background-color: green;
+}

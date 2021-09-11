@@ -34,18 +34,30 @@ class User {
   }
 
   get profile() {
+    /* return `
+      ${this.name}
+      ${this.email}
+      ${this.birthYear}
+      ${this.address}
+      ${this.postCode}
+      ${this.present}
+      ${this.interestIn}
+      ${this.commentOn}
+      ${this.acceptThat}
+    ` */
+
     return (
-      `${this.name} ${this.birthYear}\n` +
-      `## Gifts: (${this.present.length})\n` +
-      `${this.present.map(gift => `#### "${gift.name}" taken by ${gift.acceptBy.name}`).join('\n')}\n` +
-      `## Interested (${this.interestIn.length}) gifts\n` +
+      `${this.name} ${this.birthYear}` +
+      `## Gifts: (${this.present.length})` +
+      `${this.present.map(gift => `#### "${gift.name}" taken by ${gift.acceptBy.name}`).join('')}` +
+      `## Interested (${this.interestIn.length}) gifts` +
       `${this.interestIn
         .map(gift => `#### ${gift.name} also 💛 by ${gift.interestBy.map(user => user.name).join(', ')}`)
-        .join('\n')}\n` +
-      `## Commented (${this.commentOn.length}) times\n` +
-      `${this.commentOn.map(({ gift, comment }) => `#### ${gift.name} 💬 "${comment}"`).join('\n')}\n` +
-      `## Took (${this.acceptThat.length})\n` +
-      `${this.acceptThat.map(gift => `#### "${gift.name}" present by ${gift.presentBy}`).join('\n')}\n`
+        .join('')}` +
+      `## Commented (${this.commentOn.length}) times` +
+      `${this.commentOn.map(({ gift, comment }) => `#### ${gift.name} 💬 "${comment}"`).join('')}` +
+      `## Took (${this.acceptThat.length})` +
+      `${this.acceptThat.map(gift => `#### "${gift.name}" present by ${gift.presentBy}`).join('')}`
     )
   }
 
