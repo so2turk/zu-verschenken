@@ -6,39 +6,39 @@ class Gift {
     this.address = address
     this.location = location
     this.photos = photos
-    this.giftedBy = ''
-    this.interestedBy = []
-    this.commentedBy = []
-    this.takenBy = ''
-    this.giftedOn = 0 // date
-    this.takenOn = 0 // date
+    this.presentBy = ''
+    this.interestBy = []
+    this.commentBy = []
+    this.acceptBy = ''
+    this.presentDate = 0 // date
+    this.acceptDate = 0 // date
   }
 
   anonymous() {
-    this.takenBy = 'anonymously'
-    this.takenOn = new Date()
+    this.acceptBy = 'anonymously'
+    this.acceptDate = new Date()
   }
 
   get status() {
-    return this.perished(this.giftedOn)
+    return this.perished(this.presentDate)
   }
 
-  perished(time) {
-    const nowTheTime = new Date()
-    const timeDiff = (nowTheTime - time) / 1000 / 60 / 60 / 24
-    if (this.takenBy.length > 0) return `already taken by ${this.takenBy}`
+  perished(presentDate) {
+    const now = new Date()
+    const timeDiff = (now - presentDate) / 1000 / 60 / 60 / 24
+    if (this.acceptBy.length > 0) return `already taken by ${this.acceptBy}`
     if (timeDiff <= 2) return `${Math.floor(timeDiff)} day(s) passed.. may still be there`
     return `${Math.floor(timeDiff)} day(s) passed.. nobody took it.. probably perished`
   }
 
   get profile() {
     return (
-      `${this.name} gifted by ${this.giftedBy}\n` +
-      `## Commented: (${this.commentedBy.length}) times\n` +
-      `${this.commentedBy.map(({ user, comment }) => `#### ${user.name} 💬 "${comment}"`).join('\n')}\n` +
-      `## Interested (${this.interestedBy.length}) times\n` +
-      `${this.interestedBy
-        .map(user => `#### ${user.name} also 💛 ${user.interestedIn.map(gift => `"${gift.name}"`).join(', ')}`)
+      `${this.name} gifted by ${this.presentBy}\n` +
+      `## Commented: (${this.commentBy.length}) times\n` +
+      `${this.commentBy.map(({ user, comment }) => `#### ${user.name} 💬 "${comment}"`).join('\n')}\n` +
+      `## Interested (${this.interestBy.length}) times\n` +
+      `${this.interestBy
+        .map(user => `#### ${user.name} also 💛 ${user.interestIn.map(gift => `"${gift.name}"`).join(', ')}`)
         .join('\n')}\n` +
       `## Status: ${this.status}\n`
     )
