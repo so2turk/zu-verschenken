@@ -1,0 +1,13 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "rules": {
+    "eqeqeq": "off",
+    "class-methods-use-this": "off",
+    "no-param-reassign": [1, { "props": false }]
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  }
+}

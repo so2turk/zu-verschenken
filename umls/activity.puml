@@ -1,0 +1,62 @@
+@startuml
+title Activity Diagram of zuV
+
+skinparam activity {
+    FontColor          white
+    AttributeFontColor white
+    FontSize           17
+    AttributeFontSize  15
+    AttributeFontname  Droid Sans Mono
+    BackgroundColor    #527BC6
+    BorderColor        black
+    ArrowColor         #222266
+}
+
+start
+  fork
+    :no login;
+  fork again
+    if (account?) then (yes)
+      #red:login;
+    else (no)
+      :creat account;
+    endif
+  endfork
+  :open homepage;
+  fork
+    #red:open present-gift-page;
+    #red:create gift;
+    #red:post gift;
+  fork again
+    :open gifts-page;
+      while (browse gift)
+        :open gifts page;
+        fork
+        :;
+        fork again
+          #red:like;
+        fork again
+          #red:comment;
+        fork again
+          fork
+            #red:accept;
+          fork again
+            #red:status update;
+          endfork
+        endfork
+        :close gift page;
+      endwhile
+  fork again
+    #red:open user-page;
+    fork
+      #red:profile modification;
+    fork again
+      #red:creat notification;
+    fork again
+      #red:data analysis;
+    endfork
+  endfork
+  :return homepage;
+  stop
+
+@enduml

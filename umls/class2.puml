@@ -1,0 +1,58 @@
+@startuml Class Diagram of zuV
+
+left to right direction
+
+class User{
+    name: string
+    email: string
+    birthYear: number
+    address: string
+    postCode: number
+    present: string
+    interestIn: string
+    commentOn: string
+    acceptThat: string
+    constructor()
+    addGift()
+    showInterest()
+    makeCommentOn()
+    accept()
+    get profile()
+    set profile()
+}
+class Giver{
+
+}
+class Taker{
+
+}
+
+class Gift{
+    name: string
+    category: string
+    description: string
+    address: string
+    location: string
+    photos: array
+    presentBy: string
+    interestBy: array
+    commentBy: array
+    acceptBy: string
+    presentDate: number
+    acceptDate: number
+    constructor()
+    anonymous()
+    get status()
+    perished()
+    get profile()
+    set profile()
+}
+
+User <|-- Giver
+User <|-- Taker
+Giver "1" *----> "1..*" Gift: present
+Taker "1" *----> "1..*" Gift: interest in,\ncomment on,\naccept
+Gift "1" o----> "1" Giver: present by
+Gift "1" o----> "0..1" Taker: interest by,\ncomment by,\naccept by
+
+@enduml

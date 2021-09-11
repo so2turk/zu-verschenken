@@ -1,0 +1,21 @@
+@startuml
+
+actor User
+participant "Gift" as A
+participant "ProvideInfo" as B
+participant "UploadPhoto" as C
+participant "AddGift" as D
+
+User -> A: Create a new gift
+activate A
+A -> B: Enter description
+activate B
+B -> C: Upload photo(file)
+activate C
+C --> D: Post gift
+deactivate D
+deactivate C
+deactivate B
+deactivate A
+
+@enduml
