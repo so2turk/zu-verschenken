@@ -2,12 +2,11 @@
   "name": "zuv",
   "version": "0.0.1",
   "description": "zuV - Platform to share",
-  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "lint-staged",
     "prepare": "husky install",
-    "start": "node src/index.js"
+    "start": "node ./bin/www"
   },
   "husky": {
     "hooks": {
@@ -24,6 +23,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "connect-livereload": "^0.6.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -31,8 +33,17 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2"
+    "livereload": "^0.9.3",
+    "morgan": "~1.9.1",
+    "prettier": "^2.3.2",
+    "pug": "^3.0.2"
+  },
+  "dependencies": {
+    "mongoose": "^6.0.5",
+    "mongoose-autopopulate": "^0.15.0"
   }
 }
