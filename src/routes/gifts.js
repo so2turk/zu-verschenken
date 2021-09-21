@@ -9,4 +9,8 @@ router.post('/', async (req, res) => {
   res.send(createdGift)
 })
 
+router.get('/:giftId/json', async (req, res) => {
+  const gift = await Gift.findById(req.params.giftId)
+  res.send(gift)
+})
 module.exports = router
