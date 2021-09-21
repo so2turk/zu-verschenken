@@ -12,6 +12,7 @@ const photosRouter = require('./routes/photos')
 const giveRouter = require('./routes/give')
 const takeRouter = require('./routes/take')
 const mainsRouter = require('./routes/mains')
+const giftsRouter = require('./routes/gifts')
 
 const app = express()
 
@@ -40,6 +41,7 @@ app.use('/photos', photosRouter)
 app.use('/give', giveRouter)
 app.use('/take', takeRouter)
 app.use('/mains', mainsRouter)
+app.use('/gifts', giftsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
