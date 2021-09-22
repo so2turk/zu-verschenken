@@ -5,6 +5,10 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.frontend.rule=Host(`zuv.localhost`)'
+      - 'traefik.http.routers.frontend.entrypoints=web'
     ports:
       - 8080
     volumes:
@@ -19,8 +23,12 @@ services:
       # - MONGODB_PASSWORD=
       # - MONGODB_DATABASE=
       - MONGODB_CONNECTION_STRING=mongodb://mongo/zu-verschenken
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.backend.rule=(Host(`zuv.localhost`) && PathPrefix(`/api`))'
+      - 'traefik.http.routers.backend.entrypoints=web'
     ports:
-      - 3000:3000
+      - 3000
       - 35729:35729
     volumes:
       - ./backend/src:/app/src
