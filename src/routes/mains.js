@@ -20,6 +20,12 @@ router.get('/', async (req, res) => {
   res.send(await Main.find(query))
 })
 
+/* POST create a user */
+router.post('/', async (req, res) => {
+  const createdUser = await Main.create(req.body)
+  res.send(createdUser)
+})
+
 router.get('/initialize', async (req, res) => {
   const anonymous = await Main.create({
     name: 'anonymous',
@@ -196,4 +202,40 @@ router.get('/:userId', async (req, res) => {
   else res.sendStatus(404)
 })
 
+router.post('/:userId/added', async (req, res) => {
+  const user = await Main.findById(req.params.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.addGift(gift)
+  res.sendStatus(200)
+})
+
+router.post('/:userId/interested', async (req, res) => {
+  const user = await Main.findById(req.params.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.showInterest(gift)
+  res.sendStatus(200)
+})
+
+router.post('/:userId/commented', async (req, res) => {
+  const user = await Main.findById(req.params.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.makeCommentOn(gift, req.body.comment)
+  res.sendStatus(200)
+})
+
+router.post('/:userId/took', async (req, res) => {
+  const user = await Main.findById(req.params.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.accept(gift)
+  res.sendStatus(200)
+})
+
+router.get('/:userId/json', async (req, res) => {
+  const user = await Main.findById(req.params.userId)
+  res.send(user)
+})
 module.exports = router
