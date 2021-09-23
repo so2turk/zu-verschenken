@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/normalize.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' integrity='sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I' crossorigin='anonymous')
+  body
+    .container
+      .row
+        .col-sm-6
+          .card
+            img.card-img-top(src='/images/coyotiv-logo.svg' alt='coyotiv logo')
+            .card-body
+              h5.card-title= title
+              p.card-text Welcome to #{title}
+              a.btn.btn-primary(href='#') Go somewhere
+
+        .col-sm-6
+          .card
+            img.card-img-top(src='/images/coyotiv-logo.svg' alt='coyotiv logo')
+            .card-body
+              h5.card-title= title
+              p.card-text Welcome to #{title}
+              a.btn.btn-primary(href='#') Go somewhere
