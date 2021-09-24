@@ -24,18 +24,16 @@ const giftSchema = new mongoose.Schema({
     required: true,
   },
   photos: [],
-  presentBy: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Main',
-      autopopulate: { maxDepth: 1 },
-    },
-  ],
+  presentBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Main',
+    autopopulate: { maxDepth: 2 },
+  },
   interestBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Main',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
   ],
   commentBy: [
@@ -43,18 +41,16 @@ const giftSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Main',
-        autopopulate: { maxDepth: 1 },
+        autopopulate: { maxDepth: 2 },
       },
       comment: String,
     },
   ],
-  acceptBy: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Main',
-      autopopulate: { maxDepth: 1 },
-    },
-  ],
+  acceptBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Main',
+    autopopulate: { maxDepth: 2 },
+  },
   presentDate: Date,
   acceptDate: Date,
 })

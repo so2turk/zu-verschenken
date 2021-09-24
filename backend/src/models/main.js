@@ -21,21 +21,21 @@ const mainSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Gift',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
   ],
   interestIn: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Gift',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
   ],
   commentOn: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Gift',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
     {
       type: String,
@@ -45,7 +45,7 @@ const mainSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Gift',
-      autopopulate: { maxDepth: 1 },
+      autopopulate: { maxDepth: 2 },
     },
   ],
 })
