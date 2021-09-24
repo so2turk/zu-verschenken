@@ -2,21 +2,21 @@ const request = require('supertest')
 const app = require('../src/app')
 
 describe('Users endpoints', () => {
-  it('post request to /users should create a user', async () => {
+  it('post request to /api/users should create a user', async () => {
     const userToCreate = {
       name: 'TestName' + Date.now(),
       age: 27,
       bio: 'Been There. Done That.',
     }
 
-    const createdUser = (await request(app).post('/users').send(userToCreate)).body
+    const createdUser = (await request(app).post('/api/users').send(userToCreate)).body
     expect(createdUser.name).toBe(userToCreate.name)
     expect(createdUser.age).toBe(userToCreate.age)
     expect(createdUser.bio).toBe(userToCreate.bio)
   })
 
-  it('get request to /users should list users', async () => {
-    const userList = (await request(app).get('/users')).body
+  it('get request to /api/users should list users', async () => {
+    const userList = (await request(app).get('/api/users')).body
     const usersExist = userList.length > 0
 
     expect(usersExist).toBe(true)
@@ -24,13 +24,13 @@ describe('Users endpoints', () => {
 
   it('user should be able to like a photo', async () => {
     // create a photo
-    const photo = (await request(app).post('/photos').send({ filename: 'coyotivtestingsession.png' })).body
+    const photo = (await request(app).post('/api/photos').send({ filename: 'coyotivtestingsession.png' })).body
     console.log('-------------photo--', photo)
 
     // create a user
     const userWithPhoto = (
       await request(app)
-        .post('/users')
+        .post('/api/users')
         .send({
           name: 'PhotoOwnerUser' + Date.now(),
           age: 27,
@@ -40,7 +40,7 @@ describe('Users endpoints', () => {
     console.log('-------------userWithPhoto--', userWithPhoto)
 
     // add the photo to that user
-    await request(app).post(`/users/${userWithPhoto._id}/adds`).send({ photoId: photo._id })
+    await request(app).post(`/api/users/${userWithPhoto._id}/adds`).send({ photoId: photo._id })
 
     // create another user
     const likerUser = {
@@ -49,16 +49,16 @@ describe('Users endpoints', () => {
       bio: 'Someone liking photos.',
     }
 
-    const createdLikerUser = (await request(app).post('/users').send(likerUser)).body
+    const createdLikerUser = (await request(app).post('/api/users').send(likerUser)).body
     console.log('-------------createdLikerUser--', createdLikerUser)
 
     // like the photo with that another user
-    await request(app).post(`/users/${createdLikerUser._id}/likes`).send({ photoId: photo._id })
+    await request(app).post(`/api/users/${createdLikerUser._id}/likes`).send({ photoId: photo._id })
 
-    const finalPhotoUser = (await request(app).get(`/users/${userWithPhoto._id}/json`)).body
+    const finalPhotoUser = (await request(app).get(`/api/users/${userWithPhoto._id}/json`)).body
     console.log('-------------finalPhotoUser--', finalPhotoUser)
 
-    const finalLikerUser = (await request(app).get(`/users/${createdLikerUser._id}/json`)).body
+    const finalLikerUser = (await request(app).get(`/api/users/${createdLikerUser._id}/json`)).body
     console.log('-------------finalLikerUser--', finalLikerUser)
 
     expect(finalPhotoUser.photos.length).toBe(1)

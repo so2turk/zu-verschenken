@@ -9,7 +9,7 @@ if (!connectionString) {
   connectionString = `mongodb+srv://${username}:${password}@cluster0.sqypy.mongodb.net/${dbName}?retryWrites=true&w=majority`
 }
 
-mongoose.set('debug', true)
+mongoose.set('debug', false)
 
 mongoose
   .connect(connectionString, {
