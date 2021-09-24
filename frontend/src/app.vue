@@ -1,10 +1,18 @@
 <template lang="pug">
   #app
-    h1 zu-Verschenken
+    img(alt="zuV logo" src="../src/assets/logo.png")
     #nav
       router-link(to="/") Home |&nbsp;
-      router-link(to="/about") About
+      router-link(to="/about") About |&nbsp;
+      router-link(to="/users") Users |&nbsp;
+      router-link(to="/gifts") Gifts
     router-view
+    #footer 
+      p
+      p
+      footer.footer 
+        container 
+          span.text-muted (c) SO 2021
 </template>
 
 <style lang="scss">
@@ -12,7 +20,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
