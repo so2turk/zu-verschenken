@@ -28,6 +28,16 @@ const routes = [
     name: 'Gifts',
     component: () => import('../views/gifts.vue'),
   },
+  {
+    path: '/user-list',
+    name: 'UserList',
+    component: () => import('../views/user-list.vue'),
+  },
+  {
+    path: '/mains/:id',
+    name: 'UserDetail',
+    component: () => import('../views/user-detail.vue'),
+  },
 ]
 
 const router = new VueRouter({

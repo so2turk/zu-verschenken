@@ -198,7 +198,7 @@ router.get('/initialize', async (req, res) => {
 router.get('/:userId', async (req, res) => {
   const user = await Main.findById(req.params.userId)
 
-  if (user) res.render('main', { user })
+  if (user) res.send(user)
   else res.sendStatus(404)
 })
 

@@ -5,7 +5,8 @@
       router-link(to="/") Home |&nbsp;
       router-link(to="/about") About |&nbsp;
       router-link(to="/users") Users |&nbsp;
-      router-link(to="/gifts") Gifts
+      router-link(to="/gifts") Gifts |&nbsp;
+      router-link(to="/user-list") User List
     router-view
     #footer 
       p

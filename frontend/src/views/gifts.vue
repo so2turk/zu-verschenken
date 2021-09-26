@@ -3,7 +3,7 @@ import axios from 'axios'
 import GiftCard from '@/components/gift-card.vue'
 
 export default {
-  name: 'Home',
+  name: 'Gift',
   components: {
     GiftCard,
   },
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template lang="pug">
-  .home
+  .Gift
     h1 Gifts
     gift-card(v-for="gift in gifts" :gift="gift")
 </template>

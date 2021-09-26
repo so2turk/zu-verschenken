@@ -10,12 +10,10 @@ export default {
   data() {
     return {
       mains: [],
-      gifts: [],
     }
   },
   async created() {
     const usersRequest = await axios.get('/api/mains')
-
     this.mains = usersRequest.data
   },
 }
