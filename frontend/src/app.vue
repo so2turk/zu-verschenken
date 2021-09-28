@@ -3,10 +3,10 @@
     img(alt="zuV logo" src="../src/assets/logo.png")
     #nav
       router-link(to="/") Home |&nbsp;
-      router-link(to="/about") About |&nbsp;
+      router-link(to="/about") About<br>
       router-link(to="/users") Users |&nbsp;
+      router-link(to="/user-list") User List<br>
       router-link(to="/gifts") Gifts |&nbsp;
-      router-link(to="/user-list") User List |&nbsp;
       router-link(to="/gift-list") Gift List
     router-view
     #footer 
