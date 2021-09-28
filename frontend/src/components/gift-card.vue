@@ -9,31 +9,32 @@ export default {
 </script>
 
 <template lang="pug">
-.div
+.GiftCard
+  .div
     .row-1
-        h2 {{ gift.name }}
+      h2 {{ gift.name }}
     .row-2
-        .col-1
-            p(v-if="!gift.photos.length")
-                | no photo
-            .photo-box(v-else)
-                | {{ gift.photos }}
-        .col-2
-            p category: {{ gift.category }}
-            p description: {{ gift.description }}
-            p address: {{ gift.address }}
-            p location: {{ gift.location }}
-            p presented by {{ gift.presentBy.name }} on {{ gift.presentDate }}
-            p(v-if="!gift.interestBy.length")
-                | interested by: -
-            p(v-else)
-                | interested by: {{ gift.interestBy.map(main => main.name).join('\n') }}
-            p(v-if="!gift.commentBy.length")
-                | comment by: -
-            p(v-else)
-                | comment by: <br> {{ gift.commentBy.map(main => `\* ${main.user.name}: ${main.comment}`).join('\n') }}
-            p status: {{ gift.giftStatus }}
-            p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
+      .col-1
+        .photo-box(v-if="!gift.photos.length")
+          | no photo
+        .photo-box(v-else)
+          | {{ gift.photos }}
+      .col-2
+        p category: {{ gift.category }}
+        p description: {{ gift.description }}
+        p address: {{ gift.address }}
+        p location: {{ gift.location }}
+        p presented by {{ gift.presentBy.name }} on {{ gift.presentDate }}
+        p(v-if="!gift.interestBy.length")
+          | interested by: -
+        p(v-else)
+          | interested by: {{ gift.interestBy.map(main => main.name).join('\n') }}
+        p(v-if="!gift.commentBy.length")
+          | comment by: -
+        p(v-else)
+          | comment by: <br> {{ gift.commentBy.map(main => `\* ${main.user.name}: ${main.comment}`).join('\n') }}
+        p status: {{ gift.giftStatus }}
+        p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
 </template>
 
 <style lang="scss" scoped>

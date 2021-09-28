@@ -38,6 +38,16 @@ const routes = [
     name: 'UserDetail',
     component: () => import('../views/user-detail.vue'),
   },
+  {
+    path: '/gift-list',
+    name: 'GiftList',
+    component: () => import('../views/gift-list.vue'),
+  },
+  {
+    path: '/gifts/:id',
+    name: 'GiftDetails',
+    component: () => import('../views/gift-detail.vue'),
+  },
 ]
 
 const router = new VueRouter({

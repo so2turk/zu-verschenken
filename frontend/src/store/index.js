@@ -22,12 +22,20 @@ export default new Vuex.Store({
       Store.commit(mutations.INCREMENT_COUNT)
     },
     async fetchUser(store, id) {
-      const usersRequest = await axios.get(`/api/mains/${id}`)
-      return usersRequest.data
+      const userRequest = await axios.get(`/api/mains/${id}`)
+      return userRequest.data
     },
     async fetchUsers() {
       const usersRequest = await axios.get('/api/mains')
       return usersRequest.data
+    },
+    async fetchGifts() {
+      const giftsRequest = await axios.get('/api/gifts')
+      return giftsRequest.data
+    },
+    async fetchGift(store, id) {
+      const giftRequest = await axios.get(`/api/gifts/${id}`)
+      return giftRequest.data
     },
   },
   modules: {},

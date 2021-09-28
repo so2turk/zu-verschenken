@@ -24,6 +24,13 @@ router.post('/', async (req, res) => {
   res.send(createdGift)
 })
 
+router.get('/:giftId', async (req, res) => {
+  const gift = await Gift.findById(req.params.giftId)
+
+  if (gift) res.send(gift)
+  else res.sendStatus(404)
+})
+
 router.get('/:giftId/json', async (req, res) => {
   const gift = await Gift.findById(req.params.giftId)
   res.send(gift)

@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template lang="pug">
-  .home
+  .users
     h1 Users
     user-card(v-for="main in mains" :main="main")
 </template>
