@@ -6,15 +6,20 @@ Vue.use(Vuex)
 
 const mutations = {
   INCREMENT_COUNT: 'incrementCount',
+  SET_MAIN: 'set main',
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     count: 0,
+    main: null,
   },
   mutations: {
     [mutations.INCREMENT_COUNT](state) {
       state.count++
+    },
+    [mutations.SET_MAIN](state, main) {
+      state.main = main
     },
   },
   actions: {
@@ -29,6 +34,25 @@ export default new Vuex.Store({
       const usersRequest = await axios.get('/api/mains')
       return usersRequest.data
     },
+    async fetchSession({ commit }) {
+      const main = await axios.get('/api/account/session')
+      commit(mutations.SET_MAIN, main.data || null)
+    },
+    async login({ commit }, credentials) {
+      try {
+        const main = await axios.post('/api/account/session', credentials)
+        commit(mutations.SET_MAIN, main.data)
+      } catch (e) {
+        throw e
+      }
+    },
+    async register(store, main) {
+      return axios.post('/api/account', main)
+    },
+    async logout({ commit }) {
+      await axios.delete('/api/account/session')
+      commit(mutations.SET_MAIN, null)
+    },
     async fetchGifts() {
       const giftsRequest = await axios.get('/api/gifts')
       return giftsRequest.data
@@ -40,3 +64,8 @@ export default new Vuex.Store({
   },
   modules: {},
 })
+
+export default async function init() {
+  await store.dispatch('fetchSession')
+  return store
+}

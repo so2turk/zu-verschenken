@@ -1,6 +1,7 @@
 const express = require('express')
 
 const router = express.Router()
+const axios = require('axios')
 
 const Main = require('../models/main')
 const Gift = require('../models/gift')
@@ -22,88 +23,125 @@ router.get('/', async (req, res) => {
 
 /* POST create a user */
 router.post('/', async (req, res) => {
-  const createdUser = await Main.create(req.body)
+  const userToCreate = {
+    name: req.body.name,
+    age: req.body.age,
+  }
+
+  const createdUser = await Main.create(userToCreate)
   res.send(createdUser)
 })
 
 router.get('/initialize', async (req, res) => {
-  const anonymous = await Main.create({
+  const anonymous = new Main({
     name: 'anonymous',
     birthYear: 0,
-    email: '0',
+    email: 'an@nymous.com',
     address: '0',
     postcode: 0,
   })
-  const serhat = await Main.create({
+  await anonymous.setPassword('lol')
+  await anonymous.save()
+
+  const serhat = new Main({
     name: 'serhat',
     birthYear: 1980,
     email: 's@zturk.com',
     address: 'kreuzberg',
     postcode: 10000,
   })
-  const armagan = await Main.create({
+  await serhat.setPassword('lol')
+  await serhat.save()
+
+  const armagan = new Main({
     name: 'armagan',
     birthYear: 2000,
-    email: 'arm@GainNode.com',
+    email: 'arm@gan.com',
     address: 'schoneberg',
     postcode: 11000,
   })
-  const neslihan = await Main.create({
+  await armagan.setPassword('lol')
+  await armagan.save()
+
+  const neslihan = new Main({
     name: 'neslihan',
     birthYear: 2000,
     email: 'n@slihan.com',
     address: 'antalya',
     postcode: 0,
   })
-  const desire = await Main.create({
+  await neslihan.setPassword('lol')
+  await neslihan.save()
+
+  const desire = new Main({
     name: 'desire',
     birthYear: 2000,
     email: 'd@sire.com',
     address: '-',
     postcode: 0,
   })
-  const selman = await Main.create({
+  await desire.setPassword('lol')
+  await desire.save()
+
+  const selman = new Main({
     name: 'selman',
     birthYear: 2000,
     email: 's@lman.com',
     address: 'mitte',
     postcode: 11000,
   })
-  const dilek = await Main.create({
+  await selman.setPassword('lol')
+  await selman.save()
+
+  const dilek = new Main({
     name: 'dilek',
     birthYear: 2000,
     email: 'dil@k.com',
     address: 'mitte',
     postcode: 11000,
   })
-  const gokce = await Main.create({
+  await dilek.setPassword('lol')
+  await dilek.save()
+
+  const gokce = new Main({
     name: 'gokce',
     birthYear: 2000,
     email: 'g@kce.com',
     address: 'mitte',
     postcode: 11000,
   })
-  const fatma = await Main.create({
+  await gokce.setPassword('lol')
+  await gokce.save()
+
+  const fatma = new Main({
     name: 'fatma',
     birthYear: 2000,
     email: 'f@tma.com',
     address: 'mitte',
     postcode: 11000,
   })
-  const bernard = await Main.create({
+  await fatma.setPassword('lol')
+  await fatma.save()
+
+  const bernard = new Main({
     name: 'bernard',
     birthYear: 2000,
     email: 'b@rnard.com',
     address: 'mitte',
     postcode: 11000,
   })
-  const ceyhan = await Main.create({
+  await bernard.setPassword('lol')
+  await bernard.save()
+
+  const ceyhan = new Main({
     name: 'ceyhan',
     birthYear: 2000,
     email: 'c@yhan.com',
     address: 'mitte',
     postcode: 11000,
   })
+  await ceyhan.setPassword('lol')
+  await ceyhan.save()
 
   const oldTable = await Gift.create({
     name: 'old table',

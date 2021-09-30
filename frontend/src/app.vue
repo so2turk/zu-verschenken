@@ -1,9 +1,27 @@
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  name: 'App',
+  methods: {
+    ...mapActions(['logout']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/login')
+    },
+  },
+}
+</script>
 <template lang="pug">
   #app
     img(alt="zuV logo" src="../src/assets/logo.png")
     #nav
       router-link(to="/") Home |&nbsp;
       router-link(to="/about") About<br>
+      router-link(to="/profile") Profile |&nbsp;
+      router-link(to="/login") Login |&nbsp;
+      router-link(to="/register") Register |&nbsp;
+      a(@click="doLogout" href="#") Logout <br>
       router-link(to="/users") Users |&nbsp;
       router-link(to="/user-list") User List<br>
       router-link(to="/gifts") Gifts |&nbsp;
