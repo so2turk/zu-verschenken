@@ -25,8 +25,8 @@ services:
       # - MONGODB_DATABASE=
       - MONGODB_CONNECTION_STRING=mongodb://mongo/zu-verschenken
     labels:
-      - 'traefik.http.routers.backend.rule=(Host(`zuv.localhost`) && PathPrefix(`/api`))'
       - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=(Host(`zuv.localhost`) && (PathPrefix(`/api`) || PathPrefix(`/socket`)))"
       - "traefik.http.routers.backend.entrypoints=web"
     ports:
       - 3000
