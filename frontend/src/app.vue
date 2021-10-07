@@ -31,7 +31,7 @@ export default {
       p
       p
       footer.footer 
-        container 
+        div 
           span.text-muted (c) SO 2021
 </template>
 

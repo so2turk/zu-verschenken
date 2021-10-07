@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   frontend:
     image: frontend
@@ -6,9 +6,9 @@ services:
       context: frontend
       dockerfile: Dockerfile
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.frontend.rule=Host(`zuv.localhost`)'
-      - 'traefik.http.routers.frontend.entrypoints=web'
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`zuv.localhost`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
     ports:
       - 8080
     volumes:
@@ -24,9 +24,9 @@ services:
       # - MONGODB_DATABASE=
       - MONGODB_CONNECTION_STRING=mongodb://mongo/zu-verschenken
     labels:
-      - 'traefik.enable=true'
       - 'traefik.http.routers.backend.rule=(Host(`zuv.localhost`) && PathPrefix(`/api`))'
-      - 'traefik.http.routers.backend.entrypoints=web'
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.entrypoints=web"
     ports:
       - 3000
       - 35729:35729
@@ -40,12 +40,12 @@ services:
   load-balancer:
     image: traefik:v2.2
     command:
-      - '--api.insecure=true'
-      - '--providers.docker=true'
-      - '--providers.docker.exposedbydefault=false'
-      - '--entrypoints.web.address=:80'
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
-      - '80:80'
-      - '8080:8080'
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"

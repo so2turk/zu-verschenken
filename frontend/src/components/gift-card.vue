@@ -1,6 +1,9 @@
 <script>
+import InterestedIn from '@/components/interested-in.vue'
+
 export default {
   name: 'GiftCard',
+  components: { InterestedIn },
   props: ['gift'],
   data() {
     return {}
@@ -19,6 +22,7 @@ export default {
           | no photo
         .photo-box(v-else)
           | {{ gift.photos }}
+        InterestedIn
       .col-2
         p category: {{ gift.category }}
         p description: {{ gift.description }}
