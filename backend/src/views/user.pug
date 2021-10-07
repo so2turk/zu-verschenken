@@ -1,13 +1,17 @@
 extends layout
 
 block content
-  h1 #{user.name} (#{user.age})
-  p Bio: #{user.bio}
-  h2 Photos (#{user.photos.length})
-
-  each photo in user.photos
-    h3 #{photo.filename}
-    if photo.likedBy.length == 0
-      p no likes yet!
-    else
-      p #{photo.likedBy.map(user => user.name).join(', ')}
+  h1 #{user.name} (#{user.email})
+  h2 Gifts: #{user.present.length}
+    each gift in user.present 
+      h3 Name: #{gift.name}
+      h3 Status: #{gift.perished}
+      if gift.interestedBy.length == 0
+        p Noone interested yet 
+      else 
+        p Interested by: #{gift.interestedBy.map => user.name}.join(', ')
+      if gift.commentedby.length == 0
+        p Noone commented yet 
+      else 
+        p Commented by: #{gift.commented.map => user.name}.join(', ')
+ 

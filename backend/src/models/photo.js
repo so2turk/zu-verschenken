@@ -10,6 +10,7 @@ const photoSchema = new mongoose.Schema({
       autopopulate: true,
     },
   ],
+  description: String,
 })
 
 photoSchema.plugin(autopopulate)

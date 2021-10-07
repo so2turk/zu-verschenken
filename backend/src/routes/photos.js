@@ -5,7 +5,11 @@ const Photo = require('../models/photo')
 
 /* POST create a photo */
 router.post('/', async (req, res) => {
-  const createdPhoto = await Photo.create(req.body)
+  const photoToCreate = {
+    filename: req.body.filename,
+  }
+
+  const createdPhoto = await Photo.create(photoToCreate)
   res.send(createdPhoto)
 })
 
