@@ -1,5 +1,4 @@
 <script>
-import axios from 'axios'
 import Counter from '@/components/counter.vue'
 import { mapActions } from 'vuex'
 

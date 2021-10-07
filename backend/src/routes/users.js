@@ -1,7 +1,10 @@
 const express = require('express')
 
 const router = express.Router()
+const axios = require('axios')
 
+const describeImage = require('../lib/image-description')
+const downloadImage = require('../lib/download-image')
 const User = require('../models/user')
 const Gift = require('../models/gift')
 const Photo = require('../models/photo')
@@ -33,6 +36,20 @@ router.post('/', async (req, res) => {
   const createdUser = await User.create(userToCreate)
   res.send(createdUser)
 })
+
+async function createPhoto(filename) {
+  const photo = await Photo.create({ filename })
+
+  const picsumUrl = `https://picsum.photos/seed/${photo._id}/300/300`
+  const pictureRequest = await axios.get(picsumUrl)
+  photo.filename = pictureRequest.request.path
+
+  const imagePath = await downloadImage(picsumUrl, filename)
+  const description = await describeImage(imagePath)
+  photo.description = description.BestOutcome.Description
+
+  return photo.save()
+}
 
 router.get('/initialize', async (req, res) => {
   const anonymous = new User({
