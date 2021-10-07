@@ -52,7 +52,7 @@ export default {
       label(for="address") Address:&nbsp;
         input(v-model="address" id="address" type="text" placeholder="Your address" required)
       label(for="postcode") Postcode:&nbsp;
-        input(v-model="postcode" id="postcode" type="text" placeholder="Your postcode" required)
+        input(v-model="postcode" id="postcode" type="number" placeholder="Your postcode" required)
       label(for="password") Password:&nbsp;
         input(v-model="password" id="password" type="password" placeholder="Your password" required)
       input(type="submit" value="Register")
