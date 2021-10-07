@@ -8,11 +8,11 @@ export default {
   components: { UserCard, Counter },
   data() {
     return {
-      main: null,
+      user: null,
     }
   },
   async created() {
-    this.main = await this.fetchUser(this.$route.params.id)
+    this.user = await this.fetchUser(this.$route.params.id)
   },
   methods: {
     ...mapActions(['fetchUser']),
@@ -22,6 +22,6 @@ export default {
 <template lang="pug">
   .UserDetail
     h1 This is an user detail
-    UserCard(:main="main")
+    UserCard(:user="user")
     Counter
 </template>

@@ -41,7 +41,7 @@ export default function init(store) {
         component: () => import('../views/user-list.vue'),
       },
       {
-        path: '/mains/:id',
+        path: '/users/:id',
         name: 'UserDetail',
         component: () => import('../views/user-detail.vue'),
       },
@@ -60,7 +60,7 @@ export default function init(store) {
         name: 'register',
         component: Register,
         beforeEnter(to, from, next) {
-          if (store.state.main) return next('/profile')
+          if (store.state.user) return next('/profile')
           return next()
         },
       },
@@ -69,7 +69,7 @@ export default function init(store) {
         name: 'login',
         component: Login,
         beforeEnter(to, from, next) {
-          if (store.state.main) return next('/profile')
+          if (store.state.user) return next('/profile')
           return next()
         },
       },
@@ -78,7 +78,7 @@ export default function init(store) {
         name: 'profile',
         component: UserList,
         beforeEnter(to, from, next) {
-          if (!store.state.main) return next('/login')
+          if (!store.state.user) return next('/login')
           return next()
         },
       },

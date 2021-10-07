@@ -9,12 +9,12 @@ export default {
   },
   data() {
     return {
-      mains: [],
+      users: [],
     }
   },
   async created() {
-    const usersRequest = await axios.get('/api/mains')
-    this.mains = usersRequest.data
+    const usersRequest = await axios.get('/api/users')
+    this.users = usersRequest.data
   },
 }
 </script>
@@ -22,5 +22,5 @@ export default {
 <template lang="pug">
   .users
     h1 Users
-    user-card(v-for="main in mains" :main="main")
+    user-card(v-for="user in users" :user="user")
 </template>

@@ -6,7 +6,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-async function main() {
+async function user() {
   let storeInstance = await store()
 
   new Vue({
@@ -16,4 +16,4 @@ async function main() {
   }).$mount('#app')
 }
 
-main()
+user()

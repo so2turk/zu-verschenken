@@ -8,12 +8,12 @@ export default {
   components: { Counter },
   data() {
     return {
-      mains: [],
+      users: [],
       time: new Date(),
     }
   },
   async created() {
-    this.mains = await this.fetchUsers()
+    this.users = await this.fetchUsers()
   },
   methods: {
     ...mapActions(['fetchUsers']),
@@ -25,7 +25,7 @@ export default {
   .UserList
     h1 User detail
     p The time is: {{ time }}
-    div(v-for="main in mains")
-      router-link(:to="`/mains/${main._id}`") {{ main.name }}
+    div(v-for="user in users")
+      router-link(:to="`/users/${user._id}`") {{ user.name }}
     Counter
 </template>

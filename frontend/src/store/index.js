@@ -6,20 +6,21 @@ Vue.use(Vuex)
 
 const mutations = {
   INCREMENT_COUNT: 'incrementCount',
-  SET_MAIN: 'set main',
+  SET_USER: 'set user',
 }
 
 const store = new Vuex.Store({
   state: {
     count: 0,
-    main: null,
+    user: null,
   },
   mutations: {
     [mutations.INCREMENT_COUNT](state) {
       state.count++
     },
-    [mutations.SET_MAIN](state, main) {
-      state.main = main
+    [mutations.SET_USER](state, user) {
+      state.user = user
+    },
     },
   },
   actions: {
@@ -27,31 +28,31 @@ const store = new Vuex.Store({
       Store.commit(mutations.INCREMENT_COUNT)
     },
     async fetchUser(store, id) {
-      const userRequest = await axios.get(`/api/mains/${id}`)
+      const userRequest = await axios.get(`/api/users/${id}`)
       return userRequest.data
     },
     async fetchUsers() {
-      const usersRequest = await axios.get('/api/mains')
+      const usersRequest = await axios.get('/api/users')
       return usersRequest.data
     },
     async fetchSession({ commit }) {
-      const main = await axios.get('/api/account/session')
-      commit(mutations.SET_MAIN, main.data || null)
+      const user = await axios.get('/api/account/session')
+      commit(mutations.SET_USER, user.data || null)
     },
     async login({ commit }, credentials) {
       try {
-        const main = await axios.post('/api/account/session', credentials)
-        commit(mutations.SET_MAIN, main.data)
+        const user = await axios.post('/api/account/session', credentials)
+        commit(mutations.SET_USER, user.data)
       } catch (e) {
         throw e
       }
     },
-    async register(store, main) {
-      return axios.post('/api/account', main)
+    async register(store, user) {
+      return axios.post('/api/account', user)
     },
     async logout({ commit }) {
       await axios.delete('/api/account/session')
-      commit(mutations.SET_MAIN, null)
+      commit(mutations.SET_USER, null)
     },
     async fetchGifts() {
       const giftsRequest = await axios.get('/api/gifts')

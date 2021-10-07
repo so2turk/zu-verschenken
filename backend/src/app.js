@@ -6,7 +6,7 @@ const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
-const Main = require('./models/main')
+const User = require('./models/user')
 
 const mongooseConnection = require('./database-connection')
 
@@ -14,7 +14,6 @@ const indexRouter = require('./routes/index')
 const accountRouter = require('./routes/account')
 const usersRouter = require('./routes/users')
 const photosRouter = require('./routes/photos')
-const mainsRouter = require('./routes/mains')
 const giftsRouter = require('./routes/gifts')
 
 const app = express()
@@ -51,10 +50,10 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.use(Main.createStrategy())
+passport.use(User.createStrategy())
 
-passport.serializeUser(Main.serializeUser())
-passport.deserializeUser(Main.deserializeUser())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -68,7 +67,6 @@ app.use('/api/', indexRouter)
 app.use('/api/account', accountRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
-app.use('/api/mains', mainsRouter)
 app.use('/api/gifts', giftsRouter)
 
 // catch 404 and forward to error handler
