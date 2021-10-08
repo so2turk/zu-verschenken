@@ -38,7 +38,7 @@ const giftSchema = new mongoose.Schema({
   ],
   commentBy: [
     {
-      user: {
+      commentingUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         autopopulate: { maxDepth: 2 },

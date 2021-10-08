@@ -22,6 +22,6 @@ export default {
 <template lang="pug">
   .UserDetail
     h1 This is an user detail
-    UserCard(:user="user")
+    UserCard(:user="user" v-if="user")
     Counter
 </template>

@@ -22,5 +22,5 @@ export default {
 <template lang="pug">
   .GiftDetail
     h1 This is a gift detail
-    GiftCard(:gift="gift")
+    GiftCard(:gift="gift" v-if="gift")
 </template>
