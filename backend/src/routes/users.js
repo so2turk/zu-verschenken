@@ -246,7 +246,8 @@ router.get('/initialize', async (req, res) => {
   await serhat.accept(toys)
   await ceyhan.accept(painting)
   await ceyhan.makeCommentOn(painting, 'beautiful.. thank u..')
-  anonymous.accept(lamp)
+  await anonymous.accept(lamp)
+  await selman.accept(babyTrage)
 
   console.log(serhat)
   res.sendStatus(200)
