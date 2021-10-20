@@ -52,11 +52,19 @@ class User {
     await this.save()
     await gift.save()
   }
-
+  
   async showInterest(gift) {
     this.interestIn.push(gift)
     gift.interestBy.push(this)
 
+    await this.save()
+    await gift.save()
+  }
+
+  async deleteInterest(gift) {
+    this.interestIn.splice(this.interestIn.findIndex(g => g._id == gift._id), 1)
+    gift.interestBy.splice(gift.interestBy.findIndex(u => u._id == this._id), 1)
+    
     await this.save()
     await gift.save()
   }
