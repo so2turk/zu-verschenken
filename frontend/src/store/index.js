@@ -106,6 +106,12 @@ const store = new Vuex.Store({
     async createComment(store, text, user, gift, createdAt) {
       axios.post('/api/comments/', text, user, gift, createdAt)
     },
+    async interestedIn(store, userId, giftId) {
+      axios.post('/api/users/interested/', userId, giftId)
+    },
+    async interestedOut(store, userId, giftId) {
+      axios.post('/api/users/unInterested/', userId, giftId)
+    },
   },
   modules: {},
 })

@@ -324,4 +324,20 @@ router.get('/:userId/json', async (req, res) => {
   res.send(user)
 })
 
+router.post('/interested', async (req, res) => {
+  const user1 = await User.findById(req.body.userId)
+  const gift1 = await Gift.findById(req.body.giftId)
+
+  await user1.showInterest(gift1)
+  res.sendStatus(200)
+})
+
+router.post('/unInterested', async (req, res) => {
+  const user1 = await User.findById(req.body.userId)
+  const gift1 = await Gift.findById(req.body.giftId)
+
+  await user1.deleteInterest(gift1)
+  res.status(200).send()
+})
+
 module.exports = router
