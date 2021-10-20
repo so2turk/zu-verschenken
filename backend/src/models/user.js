@@ -27,14 +27,11 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
-  commentOn: [
+  comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Gift',
-      autopopulate: { maxDepth: 2 },
-    },
-    {
-      type: String,
+      ref: 'Comment',
+      autopopulate: { maxDepth: 0 },
     },
   ],
   acceptThat: [
@@ -64,12 +61,16 @@ class User {
     await gift.save()
   }
 
-  async makeCommentOn(gift, comment) {
-    this.commentOn.push({ gift, comment })
-    gift.commentBy.push({ commentingUser: this, comment })
-
+  async postComment(gift, comment) {
+    comment.user = this
+    comment.gift = gift
+    comment.createdAt = new Date()
+    this.comments.push(comment)
+    gift.comments.push(comment)
+    
     await this.save()
     await gift.save()
+    await comment.save()
   }
 
   async accept(gift) {

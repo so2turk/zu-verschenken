@@ -22,5 +22,5 @@ export default {
 <template lang="pug">
   .Gifts
     h1 Gifts
-    gift-card(v-for="gift in gifts" :gift="gift")
+    gift-card(v-for="gift in gifts" :gift="gift" :key="gift")
 </template>

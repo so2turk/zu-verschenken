@@ -35,7 +35,7 @@ export default {
     h1 {{ user.name }}
     p The time is: {{ time }}
     p
-    UserCard(:user="user")
+    UserCard(:user="user" v-if="user")
     p
     div(v-if="liveStreams.length")
       h2 Live streams
