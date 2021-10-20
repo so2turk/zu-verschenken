@@ -13,7 +13,7 @@ export default function init(store) {
     base: process.env.BASE_URL,
     routes: [
       {
-        path: '/',
+        path: '*',
         name: 'Home',
         component: Home,
       },

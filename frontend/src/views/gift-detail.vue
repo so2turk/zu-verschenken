@@ -1,10 +1,11 @@
 <script>
 import GiftCard from '@/components/gift-card.vue'
+import CommentCard from '@/components/comment-card.vue'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'GiftDetail',
-  components: { GiftCard },
+  components: { GiftCard, CommentCard },
   data() {
     return {
       gift: null,
@@ -21,6 +22,6 @@ export default {
 
 <template lang="pug">
   .GiftDetail
-    h1 This is a gift detail
     GiftCard(:gift="gift" v-if="gift")
+    CommentCard
 </template>
