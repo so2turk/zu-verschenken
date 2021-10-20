@@ -33,10 +33,6 @@ export default {
           | interested by: -
         p(v-else)
           | interested by: {{ gift.interestBy.map(user => user.name).join('\n') }}
-        p(v-if="!gift.commentBy.length")
-          | comment by: -
-        p(v-else)
-          | comment by: <br> {{ gift.commentBy.map(user => `\* ${user.commentingUser.name}: ${user.comment}`).join('\n') }}
         p status: {{ gift.giftStatus }}
         p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
 </template>

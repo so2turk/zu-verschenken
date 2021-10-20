@@ -17,6 +17,7 @@ const accountRouter = require('./routes/account')
 const usersRouter = require('./routes/users')
 const photosRouter = require('./routes/photos')
 const giftsRouter = require('./routes/gifts')
+const commentsRouter = require('./routes/comments')
 
 const app = express()
 
@@ -81,6 +82,7 @@ app.use('/api/account', accountRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/photos', photosRouter)
 app.use('/api/gifts', giftsRouter)
+app.use('/api/comments', commentsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
