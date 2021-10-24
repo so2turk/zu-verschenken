@@ -111,6 +111,8 @@ const store = new Vuex.Store({
     },
     async interestedOut(store, userId, giftId) {
       axios.post('/api/users/unInterested/', userId, giftId)
+    async addGift(store, data) {
+      return axios.post('/api/users/addGift', data)
     },
   },
   modules: {},

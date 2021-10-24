@@ -1,11 +1,12 @@
 <script>
 import UserCard from '@/components/user-card.vue'
 import Counter from '@/components/counter.vue'
+import AddGiftCard from '@/components/add-gift-card.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Profile',
-  components: { Counter, UserCard },
+  components: { Counter, UserCard, AddGiftCard },
   data() {
     return {
       users: [],
@@ -53,4 +54,5 @@ export default {
       form(@submit="sendMessage")
         input(type="text" v-model="message")
         input(type="submit" value="Send message")
+            AddGiftCard
 </template>
