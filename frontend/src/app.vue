@@ -26,6 +26,7 @@ export default {
       router-link(to="/user-list") User List<br>
       router-link(to="/gifts") Gifts |&nbsp;
       router-link(to="/gift-list") Gift List
+      router-link(to="/browse-gift") Search Gifts <br>
     router-view
     #footer 
       p

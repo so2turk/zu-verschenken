@@ -82,6 +82,11 @@ export default function init(store) {
           return next()
         },
       },
+      {
+        path: '/browse-gift',
+        name: 'BrowseGift',
+        component: () => import('../views/browse-gift.vue'),
+      },
     ],
   })
 }
