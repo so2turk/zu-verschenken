@@ -325,16 +325,22 @@ router.get('/:userId/json', async (req, res) => {
 })
 
 router.post('/interested', async (req, res) => {
-  const user1 = await User.findById(req.body.userId)
-  const gift1 = await Gift.findById(req.body.giftId)
+  if(!req.user) return res.sendStatus(401)
+  const gift = await Gift.findById(req.body.giftId)
+  if(!gift) return res.sendStatus(404)
 
-  await user1.showInterest(gift1)
+  await req.user.showInterest(gift)
   res.sendStatus(200)
 })
 
-router.post('/unInterested', async (req, res) => {
-  const user1 = await User.findById(req.body.userId)
-  const gift1 = await Gift.findById(req.body.giftId)
+router.delete('/unInterested/:giftId', async (req, res) => {
+  if(!req.user) return res.sendStatus(401)
+  const gift = await Gift.findById(req.params.giftId)
+  if(!gift) return res.sendStatus(404)
+
+  await req.user.deleteInterest(gift)
+  res.status(200).send()
+})
 
 router.post('/addGift', async (req, res) => {
   const user = await User.findById(req.body.userId)
