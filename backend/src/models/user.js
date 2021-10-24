@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
+  avatar: String,
 })
 
 class User {
