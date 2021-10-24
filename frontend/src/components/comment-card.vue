@@ -3,17 +3,16 @@ import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'CommentCard',
+  props: [
+    "gift"
+  ],
   data() {
     return {
       text: '',
-      gift: {},
     }
   },
-  async created() {
-    this.gift = await this.fetchGift(this.$route.params.id)
-  },
   methods: {
-    ...mapActions(['fetchGift', 'createComment']),
+    ...mapActions(['createComment']),
     
     async postComment(e) {
       console.log(this.user.name)
@@ -24,6 +23,7 @@ export default {
           gift: this.gift,
           createdAt: new Date(),
         })
+        this.$emit("addComment")
       } catch (e) {
         console.log(console.error((e).message))
       }
@@ -38,9 +38,9 @@ export default {
 <template lang="pug">
 .CommentCard
     h3 Post Comments
-    form(@submit="postComment")
+    form(@submit.prevent="postComment")
       
-      p(v-if="!gift.comments.length")
+      p(v-if="!gift.comments")
         | would you like to be the first to comment?
       p(v-else)
         div(v-for="comment in gift.comments")
