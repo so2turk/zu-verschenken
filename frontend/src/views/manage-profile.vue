@@ -1,16 +1,22 @@
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
-  name: 'UserCard',
-  props: ['user'],
+  name: 'Manage-Profile',
   data() {
-    return {}
+    return {
+
+    }
+  },
+  computed: {
+    ...mapState(['user']),
   },
 }
 </script>
 
 <template lang="pug">
-.box
-  div
+.ManageProfile
+  .box
     .row-2
       .col-1
         .photo-box(v-if="!user.avatar")
@@ -18,34 +24,18 @@ export default {
         .photo-box(v-else)
           | {{ user.avatar }}
       .col-2
-        .row-3
-          h3 {{ user.name }}
-          h5  ({{ user.email }})
-        .row
-          h4 gifts: 
-          div(v-if="!user.present.length")
-            | no gifts yet!
-          div(v-else)
-            .gift(v-for="gift in user.present")
-              router-link(:to="`/gifts/${gift._id}`") {{ gift.name }}
-        .row
-          h4 takes: 
-          div(v-if="!user.acceptThat.length")
-            | no takes yet!
-          div(v-else)
-            .gift(v-for="gift in user.acceptThat")
-              router-link(:to="`/gifts/${gift._id}`") {{ gift.name }}
-        .row
-          h4 comments: 
-          div(v-if="!user.comments.length")
-            | no comments yet!
-          div(v-else)
-            .gift(v-for="comment in user.comments")
-              router-link(:to="`/gifts/${comment.gift._id}`") {{ comment.gift.name }}
+        label
+          li Name: {{ user.name }}
+          li Email: {{ user.email }}
+          li Age: {{ 2021-user.birthYear }}
+          li Address: {{ user.address }}
+          li Postcode: {{ user.postcode }}
+
 </template>
 
 <style lang="scss" scoped>
 .box {
+  width: 600px;
   padding: 1px;
   border: 1px solid #c80;
   background-color: #dd0;
@@ -94,6 +84,16 @@ export default {
   height: 150px;
   width: 100px;
   background-color: green;
+}
+
+music {
+    list-style: lalala;
+}
+
+@counter-style lalala {
+  system: cyclic;
+  symbols: "♪" "♫" "♩" "♬";
+  suffix: " ";
 }
 
 </style>
