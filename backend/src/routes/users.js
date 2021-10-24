@@ -336,7 +336,18 @@ router.post('/unInterested', async (req, res) => {
   const user1 = await User.findById(req.body.userId)
   const gift1 = await Gift.findById(req.body.giftId)
 
-  await user1.deleteInterest(gift1)
+router.post('/addGift', async (req, res) => {
+  const user = await User.findById(req.body.userId)
+  const toys = await Gift.create({
+    name: req.body.name,
+    category: req.body.category,
+    location: req.body.location,
+    address: req.body.address,
+    description: req.body.description,
+    photos: req.body.photos,
+    presentBy: user,
+    presentDate: new Date,
+  })
   res.status(200).send()
 })
 
