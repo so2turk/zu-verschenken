@@ -103,8 +103,8 @@ const store = new Vuex.Store({
       socket.emit('join stream', stream)
       commit(mutations.SET_LIVE_STREAM, stream)
     },
-    async createComment(store, text, user, gift, createdAt) {
-      axios.post('/api/comments/', text, user, gift, createdAt)
+    async createComment(store, data) {
+      return axios.post('/api/comments/', data)
     },
     async interestedIn(store, userId, giftId) {
       axios.post('/api/users/interested/', userId, giftId)

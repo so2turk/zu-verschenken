@@ -12,10 +12,14 @@ export default {
     }
   },
   async created() {
-    this.gift = await this.fetchGift(this.$route.params.id)
+    this.updateGift()
   },
   methods: {
     ...mapActions(['fetchGift']),
+
+    async updateGift(){
+      this.gift = await this.fetchGift(this.$route.params.id)
+    }
   },
 }
 </script>
@@ -23,5 +27,5 @@ export default {
 <template lang="pug">
   .GiftDetail
     GiftCard(:gift="gift" v-if="gift")
-    CommentCard
+    CommentCard(:gift="gift" v-if="gift" @addComment="updateGift()")
 </template>
