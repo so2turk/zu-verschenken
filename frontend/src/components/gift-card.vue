@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import InterestedIn from '@/components/interested-in.vue'
 
 export default {
@@ -8,6 +9,9 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    ...mapState(["user"])
+  }
 }
 </script>
 
@@ -22,7 +26,7 @@ export default {
           | no photo
         .photo-box(v-else)
           | {{ gift.photos }}
-        InterestedIn
+        InterestedIn(v-if="user" :gift="gift")
       .col-2
         p category: {{ gift.category }}
         p description: {{ gift.description }}
