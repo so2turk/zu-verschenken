@@ -4,9 +4,7 @@ import UserCard from '@/components/user-card.vue'
 
 export default {
   name: 'Users',
-  components: {
-    UserCard,
-  },
+  components: { UserCard },
   data() {
     return {
       users: [],
@@ -22,5 +20,5 @@ export default {
 <template lang="pug">
   .users
     h1 Users
-    user-card(v-for="user in users" :user="user" :key="user")
+    user-card(v-for="user in users" :user="user" :key="user._id")
 </template>
