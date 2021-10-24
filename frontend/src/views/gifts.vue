@@ -4,9 +4,7 @@ import GiftCard from '@/components/gift-card.vue'
 
 export default {
   name: 'Gifts',
-  components: {
-    GiftCard,
-  },
+  components: { GiftCard },
   data() {
     return {
       gifts: [],
@@ -22,5 +20,5 @@ export default {
 <template lang="pug">
   .Gifts
     h1 Gifts
-    gift-card(v-for="gift in gifts" :gift="gift" :key="gift")
+    gift-card(v-for="gift in gifts" :gift="gift" :key="gift._id")
 </template>
