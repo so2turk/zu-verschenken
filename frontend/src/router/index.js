@@ -92,6 +92,11 @@ export default function init(store) {
         name: 'BrowseGift',
         component: () => import('../views/browse-gift.vue'),
       },
+      {
+        path: '/add-new-gift',
+        name: 'AddNewGift',
+        component: () => import('../views/add-new-gift.vue'),
+      },
     ],
   })
 }
