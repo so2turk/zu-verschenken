@@ -17,9 +17,10 @@ export default {
 </script>
 <template lang="pug">
   #app
-    img(alt="zuV logo" src="../src/assets/logo.png")
+    router-link(to="/")
+      img(alt="zuV logo" src="../src/assets/logo.png")
     #nav
-      router-link(to="/") Home |&nbsp;
+      router-link(to="/*") Home |&nbsp;
       router-link(to="/about") About |&nbsp;
       router-link(to="/browse-gift") Search Gifts <br>
       router-link(to="/profile" v-if="user") Profile |&nbsp;
