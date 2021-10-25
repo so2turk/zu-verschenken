@@ -343,17 +343,16 @@ router.delete('/unInterested/:giftId', async (req, res) => {
 })
 
 router.post('/addGift', async (req, res) => {
-  const user = await User.findById(req.body.userId)
-  const toys = await Gift.create({
+  if(!req.user) return res.sendStatus(401)
+  const giftTocreate = await Gift.create({
     name: req.body.name,
     category: req.body.category,
-    location: req.body.location,
     address: req.body.address,
+    location: req.body.location,
     description: req.body.description,
-    photos: req.body.photos,
-    presentBy: user,
-    presentDate: new Date,
+    //photos: req.body.photos,
   })
+  await req.user.addGift(giftTocreate)
   res.status(200).send()
 })
 
