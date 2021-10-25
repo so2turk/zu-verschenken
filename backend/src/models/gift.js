@@ -42,11 +42,12 @@ const giftSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
-  acceptBy: {
+  acceptBy: [
+    {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     autopopulate: { maxDepth: 2 },
-  },
+    }],
   presentDate: Date,
   acceptDate: Date,
 })
