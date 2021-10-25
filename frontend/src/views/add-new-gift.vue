@@ -7,10 +7,10 @@ export default {
     return {
       name: '',
       category: '',
+      address: '',        // geolocation
       location: '',
-      address: '',
       description: '',
-      photos: [],
+      // photos: [],
     }
   },
   methods: {
@@ -23,10 +23,10 @@ export default {
         await this.addGift({
           name: this.name,
           category: this.category,
-          location: this.location,
           address: this.address,
+          location: this.location,
           description: this.description,
-          photos: this.photos,
+          // photos: this.photos,
           userId: this.user._id
         })
       } catch (e) {
@@ -44,12 +44,22 @@ export default {
 <template lang="pug">
 .box
   div
-    form( @submit="submitGift")
+    form(@submit.prevent="submitGift")
+      p(v-if="!user.present")
+        | no gift so far.. :(
+      p(v-else)
+        h4 So far you've presented {{ user.present.length }} gift(s). Please add more. 
+        div(v-for="gift in user.present")
+          li 
+            router-link(:to="`/gifts/${gift._id}`") {{ gift.name }}
+      <br>
       h3 Add a new gift
+      p
+      p(v-model="user" id="user")
+      p
       label(for="name") &nbsp;
         input(v-model="name" id="name" type="text" placeholder="Gift's name" required)
       label(for="category") &nbsp;
-        //-input(v-model="category" id="category" type="text" placeholder="Category" required)
         select(v-model="category")
           option(disabled value="") Category
           option Electronics
@@ -58,32 +68,23 @@ export default {
           option Books
           option Furniture
           option Garten
-
-      label(for="location")
-        input(v-model="location" id="location" type="text" placeholder="Location" required)
-        
-        //- label(for="Outside") Outside &nbsp;
-        //-   input(type="radio" id="one" value="Outside" v-model="picked")
-        //- label(for="Inside") Inside &nbsp;
-        //-   input(type="radio" id="two" value="Inside" v-model="picked")
-
+      label(for="address") &nbsp;
+        input(v-model="address" id="address" type="text" placeholder="Gift address" required)
+      label(for="location") &nbsp;
         select(v-model="location")
           option(disabled value="") Location
           option Outside
           option Inside
-
-      label(for="address") &nbsp;
-        input(v-model="address" id="address" type="text" placeholder="Gift address" required)
       label(for="description") &nbsp;
         textarea(v-model="description" id="description" type="description" cols="40" rows="8" placeholder="Gift Description" required)
-      label(for="photos") &nbsp;
+      //- label(for="photos") &nbsp;
         //- form(action="/photos" enctype="multipart/form-data" method="post")
         //-   div(class="form-group")
         //-     input(type="file" class="form-control-file" name="uploaded_file")
         //-     input(type="text" class="form-control" placeholder="Photo name" name="photoName")
         //-     input(type="submit" value="Upload" class="btn btn-default")
 
-      input(type="submit" value="AddGift")
+      input(type="submit" value="Add Gift")
 
 </template>
 

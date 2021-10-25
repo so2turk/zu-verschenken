@@ -30,7 +30,8 @@ export default {
       router-link(to="/user-list" v-if="user") User List |&nbsp;
       router-link(to="/gifts" v-if="user") Gifts |&nbsp;
       router-link(to="/gift-list" v-if="user") Gift List |&nbsp;
-      router-link(to="/manage-profile" v-if="user") Manage Profile
+      router-link(to="/manage-profile" v-if="user") Manage Profile |&nbsp;
+      router-link(to="/add-new-gift" v-if="user") Add New Gift
     router-view
     #footer 
       p
