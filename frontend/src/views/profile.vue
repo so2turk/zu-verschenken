@@ -1,13 +1,12 @@
 <script>
 import UserCard from '@/components/user-card.vue'
 import Counter from '@/components/counter.vue'
-import AddGiftCard from '@/components/add-gift-card.vue'
 
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Profile',
-  components: { Counter, UserCard, AddGiftCard },
+  components: { Counter, UserCard },
   data() {
     return {
       users: [],
@@ -41,8 +40,6 @@ export default {
         .row-2
           .col-2
             UserCard(:user="user" v-if="user")
-          .col-2
-            AddGiftCard
         .row-3
           p The time is: {{ time }}
           div(v-if="liveStreams.length")
