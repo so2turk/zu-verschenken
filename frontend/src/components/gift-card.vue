@@ -17,7 +17,7 @@ export default {
 
 <template lang="pug">
 .box
-  .div
+  .div(v-if="gift")
     .row-1
       h2 {{ gift.name }}
     .row-2
@@ -38,7 +38,11 @@ export default {
         p(v-else)
           | interested by: {{ gift.interestBy.map(user => user.name).join(';\n') }}
         p status: {{ gift.giftStatus }}
-        p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
+        p accepted by: 
+        p(v-if="!gift.acceptBy.length")
+          | waiting for you..
+        p(v-else)
+          | router-link(:to="`/users/${gift.acceptBy.user._id}`") {{ gift.acceptBy.name }} on {{ gift.acceptDate }}
 </template>
 
 <style lang="scss" scoped>
