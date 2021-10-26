@@ -1,23 +1,35 @@
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
+  name: "InterestedIn",
+  props: [
+    "gift"
+  ],
   data() {
-    return { interested: false, countt: 0 }
+    return { 
+      interested: false,
+      numOfInterested: 0,
+    }
+  },
+  created(){
+      this.interested = this.user.interestIn.some(interestedGift => interestedGift._id == this.gift._id)
+      this.numOfInterested = this.gift.interestBy.length
   },
   methods: {
-    showInterest: function () {
-      this.interested = !this.interested
-      this.countt++
-    },
+    ...mapActions(['showInterest', 'unInterest']),
+  },
+  computed: {
+    ...mapState(['user']),
   },
 }
 </script>
 
 <template lang="pug">
-  .InterestedIn
-    p(v-if="interested")
-      img(width=20 src="../assets/heart-green.png") 
-      |  {{ countt }}
-    P(v-else)
-      img(v-on:click="showInterest()" width=20 src="../assets/heart-black.png")
-
+  .InterestedIn(v-if="gift")
+    .div
+      p
+        img(v-if="interested" @click="unInterest({ giftId: gift._id }); numOfInterested--; interested = !interested" width=20 src="../assets/heart-green.png") 
+        img(v-else @click="showInterest({ giftId: gift._id }); numOfInterested++; interested = !interested" width=20 src="../assets/heart-black.png")
+        |  {{ numOfInterested }}
 </template>

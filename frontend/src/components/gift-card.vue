@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import InterestedIn from '@/components/interested-in.vue'
 
 export default {
@@ -8,12 +9,15 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    ...mapState(["user"])
+  }
 }
 </script>
 
 <template lang="pug">
-.GiftCard
-  .div
+.box
+  .div(v-if="gift")
     .row-1
       h2 {{ gift.name }}
     .row-2
@@ -22,7 +26,7 @@ export default {
           | no photo
         .photo-box(v-else)
           | {{ gift.photos }}
-        InterestedIn
+        InterestedIn(v-if="user" :gift="gift")
       .col-2
         p category: {{ gift.category }}
         p description: {{ gift.description }}
@@ -32,13 +36,13 @@ export default {
         p(v-if="!gift.interestBy.length")
           | interested by: -
         p(v-else)
-          | interested by: {{ gift.interestBy.map(user => user.name).join('\n') }}
-        p(v-if="!gift.commentBy.length")
-          | comment by: -
-        p(v-else)
-          | comment by: <br> {{ gift.commentBy.map(user => `\* ${user.comentingUser.name}: ${user.comment}`).join('\n') }}
+          | interested by: {{ gift.interestBy.map(user => user.name).join(';\n') }}
         p status: {{ gift.giftStatus }}
-        p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
+        p accepted by: 
+        p(v-if="!gift.acceptBy.length")
+          | waiting for you..
+        p(v-else)
+          | router-link(:to="`/users/${gift.acceptBy.user._id}`") {{ gift.acceptBy.name }} on {{ gift.acceptDate }}
 </template>
 
 <style lang="scss" scoped>

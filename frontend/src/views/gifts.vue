@@ -3,24 +3,22 @@ import axios from 'axios'
 import GiftCard from '@/components/gift-card.vue'
 
 export default {
-  name: 'Gift',
-  components: {
-    GiftCard,
-  },
+  name: 'Gifts',
+  components: { GiftCard },
   data() {
     return {
       gifts: [],
     }
   },
   async created() {
-    const usersRequest = await axios.get('/api/gifts')
-    this.gifts = usersRequest.data
+    const giftsRequest = await axios.get('/api/gifts')
+    this.gifts = giftsRequest.data
   },
 }
 </script>
 
 <template lang="pug">
-  .Gift
+  .Gifts
     h1 Gifts
-    gift-card(v-for="gift in gifts" :gift="gift")
+    gift-card(v-for="gift in gifts" :gift="gift" :key="gift._id")
 </template>

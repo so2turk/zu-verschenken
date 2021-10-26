@@ -13,7 +13,7 @@ export default function init(store) {
     base: process.env.BASE_URL,
     routes: [
       {
-        path: '/',
+        path: '*',
         name: 'Home',
         component: Home,
       },
@@ -81,6 +81,21 @@ export default function init(store) {
           if (!store.state.user) return next('/login')
           return next()
         },
+      },
+      {
+        path: '/manage-profile',
+        name: 'ManageProfile',
+        component: () => import('../views/manage-profile.vue'),
+      },
+      {
+        path: '/browse-gift',
+        name: 'BrowseGift',
+        component: () => import('../views/browse-gift.vue'),
+      },
+      {
+        path: '/add-new-gift',
+        name: 'AddNewGift',
+        component: () => import('../views/add-new-gift.vue'),
       },
     ],
   })
