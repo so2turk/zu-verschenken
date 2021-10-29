@@ -35,8 +35,6 @@ export default {
   .home
     .box
       .div
-        .row-1
-          h1 {{ user.name }} <br>
         .row-2
           .col-2
             UserCard(:user="user" v-if="user")
