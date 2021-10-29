@@ -3,14 +3,21 @@ const autopopulate = require('mongoose-autopopulate')
 
 const photoSchema = new mongoose.Schema({
   filename: String,
-  likedBy: [
+  path: String,
+  gift: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Gift',
+      autopopulate: { maxDepth: 1 },
+    },
+  ],
+  user: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      autopopulate: true,
+      autopopulate: { maxDepth: 1 },
     },
   ],
-  description: String,
 })
 
 photoSchema.plugin(autopopulate)
