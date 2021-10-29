@@ -33,6 +33,7 @@ export default {
       router-link(to="/gift-list" v-if="user") Gift List |&nbsp;
       router-link(to="/manage-profile" v-if="user") Manage Profile |&nbsp;
       router-link(to="/add-new-gift" v-if="user") Add New Gift
+          router-link(to="/map" v-if="user") Map |&nbsp;
     router-view
     #footer 
       p
