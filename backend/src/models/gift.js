@@ -32,7 +32,13 @@ const giftSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  photos: [],
+  photos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+      autopopulate: { maxDepth: 1 },
+    },
+  ],
   presentBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

@@ -41,7 +41,13 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
-  avatar: String,
+  photos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Photo',
+      autopopulate: { maxDepth: 1 },
+    },
+  ],
 })
 
 class User {
