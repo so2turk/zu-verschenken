@@ -97,6 +97,11 @@ export default function init(store) {
         name: 'AddNewGift',
         component: () => import('../views/add-new-gift.vue'),
       },
+      {
+        path: '/map',
+        name: 'Map',
+        component: () => import('../views/map.vue'),
+      },
     ],
   })
 }
