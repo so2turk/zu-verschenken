@@ -19,7 +19,7 @@ export default {
           | {{ user.avatar }}
       .col-2
         .row-3
-          h3 {{ user.name }}
+          h1 {{ user.name }} <br>
           h5  ({{ user.email }})
         .row
           h4 gifts: 
@@ -50,6 +50,7 @@ export default {
   border: 1px solid #c80;
   background-color: #dd0;
   border-radius: 0.3rem;
+  width: 800px;
 }
 .row-1 {
   height: 50px;
