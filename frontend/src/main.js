@@ -3,8 +3,18 @@ import App from './app.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "",
+    libraries: "places",
+    region: "de,en"
+  },
+  installComponents: true
+})
 
 async function user() {
   let storeInstance = await store()
