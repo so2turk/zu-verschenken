@@ -4,9 +4,10 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Manage-Profile',
   data() {
-    return {
-
-    }
+    return { }
+  },
+  methods: {
+    ...mapActions(['addAvatar']),
   },
   computed: {
     ...mapState(['user']),
@@ -31,6 +32,9 @@ export default {
           li Address: {{ user.address }}
           li Postcode: {{ user.postcode }}
 
+    form(id='form' method="post" enctype="multipart/form-data")
+      input(id='file' type="file" name="avatar")
+      input(type="submit" class="btn btn-default")
 </template>
 
 <style lang="scss" scoped>
