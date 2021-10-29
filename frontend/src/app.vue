@@ -6,14 +6,22 @@ export default {
   name: 'App',
   components: { Search },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'changeMode']),
+    
     async doLogout() {
       await this.logout()
       this.$router.push('/login')
     },
+
+    switchMode(){
+      this.changeMode()
+      var element = document.body;
+      if(this.dark) element.classList.toggle("dark-mode")
+      else element.classList.toggle("dark-mode")
+    }
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user", "dark"])
   }
 }
 </script>
@@ -42,6 +50,11 @@ export default {
           router-link(to="/add-new-gift" v-if="user") Add New Gift
       .col-2
         Search
+      .col-2
+        div(v-if="!dark")
+          img(@click="switchMode()" width="25px" src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38007/preview.svg")
+        div(v-else)
+          img(@click="switchMode()" width="40px" src="https://d29fhpw069ctt2.cloudfront.net/icon/image/49197/preview.svg")
     router-view
     #footer 
       p
@@ -52,6 +65,32 @@ export default {
 </template>
 
 <style lang="scss">
+body {
+  --text-color: #222;
+  --bkg-color: #fff;
+}
+.dark-mode {
+  --text-color: #eee;
+  --bkg-color: #2b2626;
+}
+// system preferences
+// @media (prefers-color-scheme: dark) {
+//   /* defaults to dark theme */
+//   body {
+//     --text-color: #eee;
+//     --bkg-color: #121212;
+//   }
+//   body.light-theme {
+//     --text-color: #222;
+//     --bkg-color: #fff;
+//   }
+// }
+
+body { background: var(--bkg-color); }
+
+h1,
+p { color: var(--text-color); }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
