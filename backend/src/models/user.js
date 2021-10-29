@@ -96,6 +96,20 @@ class User {
     await this.save()
     await gift.save()
   }
+
+  async addAvatar(avatar) {
+    this.photos.push(avatar);
+
+    await this.save();
+  }
+
+  async addPhoto(photo, gift) {
+    this.photos.push(photo);
+    gift.photos.push(photo)
+
+    await this.save();
+    await gift.save();
+  }
 }
 
 userSchema.loadClass(User)
