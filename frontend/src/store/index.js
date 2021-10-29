@@ -17,6 +17,7 @@ const mutations = {
   SET_LIVE_STREAM: 'set live stream',
   ADD_LIVE_STREAM: 'add live stream',
   ADD_MESSAGE_TO_LIVE_STREAM: 'add message to live stream',
+  DARK_MODE: 'dark mode',
 }
 
 const store = new Vuex.Store({
@@ -26,6 +27,7 @@ const store = new Vuex.Store({
     currentLiveStream: null,
     liveStreams: [],
     liveStreamMessages: [],
+    dark: false,
   },
   mutations: {
     [mutations.INCREMENT_COUNT](state) {
@@ -42,6 +44,9 @@ const store = new Vuex.Store({
     },
     [mutations.ADD_MESSAGE_TO_LIVE_STREAM](state, message) {
       state.liveStreamMessages.push(message)
+    },
+    [mutations.DARK_MODE](state) {
+      state.dark = !state.dark
     },
   },
   actions: {
@@ -114,6 +119,9 @@ const store = new Vuex.Store({
     },
     async addGift(store, data) {
       return axios.post('/api/users/addGift', data)
+    },
+    changeMode(Store) {
+      Store.commit(mutations.DARK_MODE)
     },
   },
   modules: {},
