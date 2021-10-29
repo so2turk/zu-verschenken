@@ -170,7 +170,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.489251391027786, lng: 13.39262301870654 },
     location: 'outside',
     description: 'in good condition, few scratches',
-    photos: ['topLeft', 'bottomLeft'],
+    // photos: ['topLeft', 'bottomLeft'],
   })
   await serhat.addGift(oldTable)
   const oldMac = await Gift.create({
@@ -180,7 +180,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.499251391027786, lng: 13.39762301870654 },
     location: 'inside',
     description: 'better than nothing',
-    photos: ['keyboard', 'screen'],
+    // photos: ['keyboard', 'screen'],
   })
   await armagan.addGift(oldMac)
   await serhat.showInterest(oldMac)
@@ -201,7 +201,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.479251391027786, lng: 13.38262301870654 },
     location: 'inside',
     description: 'like a new one',
-    photos: ['trage'],
+    // photos: ['trage'],
   })
   await serhat.addGift(babyTrage)
   const backPack = await Gift.create({
@@ -211,7 +211,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.489251391027786, lng: 13.39262301870654 },
     location: 'outside',
     description: 'need small repairment',
-    photos: [''],
+    // photos: [''],
   })
   await desire.addGift(backPack)
   await neslihan.showInterest(backPack)
@@ -240,7 +240,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.469251391027786, lng: 13.37262301870654 },
     location: 'outside',
     description: 'nothing fancy',
-    photos: [],
+    // photos: [],
   })
   await selman.addGift(lamp)
   const toys = await Gift.create({
@@ -250,7 +250,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.459251391027786, lng: 13.39262301870654 },
     location: 'outside',
     description: 'never used',
-    photos: ['toys'],
+    // photos: ['toys'],
   })
   await dilek.addGift(toys)
   await gokce.showInterest(toys)
@@ -271,7 +271,7 @@ router.get('/initialize', async (req, res) => {
     geolocation: { lat: 52.449251391027786, lng: 13.36262301870654 },
     location: 'outside',
     description: 'maybe a bit dusty',
-    photos: ['painting1', 'painting2'],
+    // photos: ['painting1', 'painting2'],
   })
   await fatma.addGift(painting)
   await serhat.accept(backPack)
@@ -358,7 +358,7 @@ router.post('/addGift', async (req, res) => {
     geolocation: req.body.geolocation,
     location: req.body.location,
     description: req.body.description,
-    //photos: req.body.photos,
+    // photos: req.body.photos,
   })
   await req.user.addGift(giftTocreate)
   res.status(200).send()
