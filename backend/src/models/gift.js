@@ -16,7 +16,17 @@ const giftSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: true,
+    required: false,
+  },
+  geolocation: {
+    lat: {
+      type: Number,
+      required: true,
+    },
+    lng: {
+      type: Number,
+      required: true,
+    },
   },
   location: {
     type: String,
