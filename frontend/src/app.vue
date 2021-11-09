@@ -33,22 +33,57 @@ export default {
           img(v-if="dark" alt="zuV logo" width="100" src="../src/assets/logoBig-b.png")
           img(v-else alt="zuV logo" width="100" src="../src/assets/logoBig.png")        
       .col-2
-        #nav
-          router-link(to="/*") Home |&nbsp;
-          router-link(to="/about") About |&nbsp;
-          router-link(to="/browse-gift") Search Gifts <br>
-          router-link(to="/profile" v-if="user") Profile |&nbsp;
-          router-link(to="/login" v-if="!user") Login |&nbsp;
-          router-link(to="/register" v-if="!user") Register |&nbsp;
-          a(@click="doLogout" href="#" v-if="user") Logout <br>
-          router-link(to="/users" v-if="user") Users |&nbsp;
-          router-link(to="/user-list" v-if="user") User List |&nbsp;
-          router-link(to="/manage-profile" v-if="user") Manage Profile <br>
-          router-link(to="/gifts" v-if="user") Gifts |&nbsp;
-          router-link(to="/gift-list" v-if="user") Gift List |&nbsp;
-          router-link(to="/map" v-if="user") Map |&nbsp;
-          router-link(to="/add-new-gift" v-if="user") Add New Gift
-      .col-2
+
+    .row-2
+      .col-5
+        p
+        p
+        <br><br>
+        .div(class="container")
+          router-link(to="/*") 
+            img(width=40 src="https://www.clipartmax.com/png/full/52-523723_home-house-location-place-icon-green-home-icon-png.png")
+            .div(class="middle")
+              .div(class="text") Home
+        div(class="container")
+          router-link(to="/about") 
+            img(width=40 src="https://www.clipartmax.com/png/full/164-1649352_get-more-info-information-icon-green.png")
+            .div(class="middle")
+              .div(class="text") About
+        div(class="container")
+          router-link(to="/gifts") 
+            img(width=50 src="https://www.clipartmax.com/png/full/1-12143_clipart-info-christmas-gift-clipart.png")
+            .div(class="middle")
+              .div(class="text") Gifs
+        div(class="container")
+          router-link(to="/map")
+            img(width=35 src="https://www.clipartmax.com/png/full/17-170067_green-map-pin-png.png")
+            .div(class="middle")
+              .div(class="text") Browe Map
+        div(class="container")
+          router-link(to="/add-new-gift" v-if="user") 
+            img(width=50 src="https://www.clipartmax.com/png/full/344-3447054_give-free-transparent-image-hd-giving-hand-icon-png.png")
+            .div(class="middle")
+              .div(class="text") Add New Gif      
+        div(class="container")
+          router-link(to="/profile" v-if="user")
+            img(width=45 src="https://www.clipartmax.com/png/full/343-3436413_positive-icon-clipart-computer-icons-clip-art-green-profile-icon-png.png")
+            .div(class="middle")
+              .div(class="text") Profile
+        .div(class="container")
+          router-link(to="/login" v-if="!user")
+            img(width=40 src="https://www.clipartmax.com/png/full/51-514952_user-login-icon-by-aha-soft-user-login-icon.png")
+            .div(class="middle")
+              .div(class="text") Login
+        .div(class="container")
+          router-link(to="/register" v-if="!user")
+            img(width=40 src="https://www.clipartmax.com/png/full/81-819876_imd-register-icon-register-icon-green-png.png")
+            .div(class="middle")
+              .div(class="text") Register
+        .div(class="container")
+          a(@click="doLogout" href="#" v-if="user")
+            img(width=40 src="https://www.clipartmax.com/png/full/147-1470587_logout-logout-icon-red-png.png")
+            .div(class="middle")
+              .div(class="text") Logout
 
       .col-6
         router-view
@@ -155,10 +190,26 @@ body { background: var(--bkg-color); }
 h1,
 p { color: var(--text-color); }
 
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: relative;
+  left: 50%;
+  transform: translate(-10%, -110%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 
+.container:hover .middle {
+  opacity: 1;
 }
 
+.text {
+  background-color: #04AA6D;
+  color: white;
+  font-size: 16px;
+  padding: 16px 15px;
+  border-radius: 6px;
 }
 
 
