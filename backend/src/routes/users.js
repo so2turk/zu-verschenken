@@ -28,7 +28,6 @@ router.post('/', async (req, res) => {
   const userToCreate = {
     name: req.body.name,
     birthYear: req.body.birthYear,
-    address: req.body.address,
     postcode: req.body.postcode,
   }
 
@@ -41,107 +40,96 @@ router.get('/initialize', async (req, res) => {
     name: 'anonymous',
     birthYear: 0,
     email: 'an@nymous.com',
-    address: '0',
     postcode: 0,
   })
   await anonymous.setPassword('lol')
   await anonymous.save()
 
   const serhat = new User({
-    name: 'serhat',
+    name: 'Serhat',
     birthYear: 1980,
     email: 's@zturk.com',
-    address: 'kreuzberg',
     postcode: 10000,
   })
   await serhat.setPassword('lol')
   await serhat.save()
 
   const armagan = new User({
-    name: 'armagan',
+    name: 'Armagan',
     birthYear: 2000,
     email: 'arm@gan.com',
-    address: 'schoneberg',
     postcode: 11000,
   })
   await armagan.setPassword('lol')
   await armagan.save()
 
   const neslihan = new User({
-    name: 'neslihan',
+    name: 'Neslihan',
     birthYear: 2000,
     email: 'n@slihan.com',
-    address: 'antalya',
     postcode: 0,
   })
   await neslihan.setPassword('lol')
   await neslihan.save()
 
   const desire = new User({
-    name: 'desire',
+    name: 'Desire',
     birthYear: 2000,
     email: 'd@sire.com',
-    address: '-',
     postcode: 0,
   })
   await desire.setPassword('lol')
   await desire.save()
 
   const selman = new User({
-    name: 'selman',
+    name: 'Selman',
     birthYear: 2000,
     email: 's@lman.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await selman.setPassword('lol')
   await selman.save()
 
   const dilek = new User({
-    name: 'dilek',
+    name: 'Dilek',
     birthYear: 2000,
     email: 'dil@k.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await dilek.setPassword('lol')
   await dilek.save()
 
   const gokce = new User({
-    name: 'gokce',
+    name: 'Gokce',
     birthYear: 2000,
     email: 'g@kce.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await gokce.setPassword('lol')
   await gokce.save()
 
   const fatma = new User({
-    name: 'fatma',
+    name: 'Fatma',
     birthYear: 2000,
     email: 'f@tma.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await fatma.setPassword('lol')
   await fatma.save()
 
   const bernard = new User({
-    name: 'bernard',
+    name: 'Bernard',
     birthYear: 2000,
     email: 'b@rnard.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await bernard.setPassword('lol')
   await bernard.save()
 
   const ceyhan = new User({
-    name: 'ceyhan',
+    name: 'Ceyhan',
     birthYear: 2000,
     email: 'c@yhan.com',
-    address: 'mitte',
     postcode: 11000,
   })
   await ceyhan.setPassword('lol')
