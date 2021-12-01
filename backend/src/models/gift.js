@@ -64,7 +64,7 @@ const giftSchema = new mongoose.Schema({
   ],
   presentDate: Date,
   acceptDate: Date,
-})
+}, { versionKey: false })
 
 class Gift {
   get status() {
