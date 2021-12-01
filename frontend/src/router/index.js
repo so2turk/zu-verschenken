@@ -83,11 +83,6 @@ export default function init(store) {
         },
       },
       {
-        path: '/manage-profile',
-        name: 'ManageProfile',
-        component: () => import('../views/manage-profile.vue'),
-      },
-      {
         path: '/browse-gift',
         name: 'BrowseGift',
         component: () => import('../views/browse-gift.vue'),
