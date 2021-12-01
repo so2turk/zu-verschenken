@@ -124,11 +124,11 @@ const store = new Vuex.Store({
       Store.commit(mutations.DARK_MODE)
     },
     async addAvatar(store, data) {
-      console.log("aaa")
-      //return axios.post('/api/photos/addAvatar', data)
-      return axios.post( '/api/photos/addAvatar', formData, { headers: {'Content-Type': 'multipart/form-data'} }
-        ).then(function(){console.log('SUCCESS!!'); })
-        .catch(function(){console.log('FAILURE!!'); });
+      return axios.post('/api/photos/addAvatar', data)
+    },
+    async delAvatar(store, data) {
+      return axios.post('/api/photos/delAvatar', data)
+    },
     },
   },
   modules: {},
