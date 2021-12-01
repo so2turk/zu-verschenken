@@ -21,7 +21,7 @@ const commentSchema = new mongoose.Schema({
     autopopulate: { maxDepth: 1 },
   },
   createdAt: Date,
-})
+}, { versionKey: false })
 
 class Comment { }
 
