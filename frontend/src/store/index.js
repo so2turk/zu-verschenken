@@ -120,6 +120,9 @@ const store = new Vuex.Store({
     async addGift(store, data) {
       return axios.post('/api/users/addGift', data)
     },
+    async addGiftPhoto(store, data) {
+      return axios.post('/api/users/addGiftPhoto', data)
+    },
     changeMode(Store) {
       Store.commit(mutations.DARK_MODE)
     },
