@@ -11,38 +11,23 @@ export default {
       location: '',
       description: '',
       geolocation: { lat: null, lng: null },
-      // photos: [],
       marker: { position: { lat: null, lng: null } },
       center: { lat: 52.51981703975256, lng: 13.40479185199118 },
       mapOptions: {
         disableDefaultUI: true,
       },
+      file: null,
+      filename: null,
+      path: null,
+      imgId: null,
+      del: null
     }
   },
   mounted() {
     this.geolocate();
   },
   methods: {
-    ...mapActions(['addGift']),
-    
-    async submitGift(e) {
-      e.preventDefault()
-
-      try {
-        await this.addGift({
-          name: this.name,
-          category: this.category,
-          address: this.address,
-          geolocation: this.marker.position,
-          location: this.location,
-          description: this.description,
-          // photos: this.photos,
-          userId: this.user._id
-        })
-      } catch (e) {
-        console.log(console.error((e).message))
-      }
-    },
+    ...mapActions(['addGift', 'addGiftPhoto']),
     
     //detects location from browser
     geolocate() {
@@ -76,6 +61,66 @@ export default {
       console.log(e)
       console.log(typeof(this.geoLat), typeof(this.geolocation.lat))
     },
+
+    selectImage(event){
+      this.file = event.target.files[0]
+    },
+
+    async sendImage() {
+      if(this.file){
+        console.log(this.file.name)
+        let formData = new FormData()
+        const ID = ''
+        formData.append('image',this.file)
+        console.log(formData, this.file, 'lol')
+  
+        await fetch("https://api.imgur.com/3/image/",{
+          method: "post",
+          headers: {
+            Authorization: `Client-ID ${ID}`
+          }, 
+          body: formData
+        }).then(data => data.json()).then(data => {
+          this.path=data.data.link,
+          this.imgId=data.data.id,
+          this.del=data.data.deletehash
+        }).then(data => console.log(data))
+        console.log(this.path)
+        
+        try {
+          await this.addGiftPhoto({
+            name: this.name,
+            category: this.category,
+            address: this.address,
+            geolocation: this.marker.position,
+            location: this.location,
+            description: this.description,
+            userId: this.user._id,
+            filename: this.file.name,
+            path: this.path,
+            imgId: this.imgId,
+            del: this.del
+          })
+        } catch (e) {
+          console.log(console.error((e).message))
+        }
+
+      }else{
+        try {
+          await this.addGift({
+            name: this.name,
+            category: this.category,
+            address: this.address,
+            geolocation: this.marker.position,
+            location: this.location,
+            description: this.description,
+            userId: this.user._id
+          })
+        } catch (e) {
+          console.log(console.error((e).message))
+        }
+      }
+    },
   },
   computed: {
     ...mapState(['user']),
@@ -84,13 +129,14 @@ export default {
 </script>
 
 <template lang="pug">
-.box
+.box(id="page-wrap")
   div
     .row-2
       .col-2
         h3 Add a new gift
         p
-        form(@submit.prevent="submitGift")
+        //- form(@submit="submitGift")
+        form(id="form" enctype="multipart/form-data")
           
           p(v-model="user" id="user")
           p
@@ -105,8 +151,7 @@ export default {
               option Books
               option Furniture
               option Garten
-          label(for="address") &nbsp;
-            input(v-model="address" id="address" type="text" placeholder="Gift address" required)
+              option Others
           label(for="location") &nbsp;
             select(v-model="location")
               option(disabled value="") Location
@@ -114,27 +159,14 @@ export default {
               option Inside
           label(for="description") &nbsp;
             textarea(v-model="description" id="description" type="description" cols="40" rows="8" placeholder="Gift Description" required)
-          //- label(for="photos") &nbsp;
-            //- form(action="/photos" enctype="multipart/form-data" method="post")
-            //-   div(class="form-group")
-            //-     input(type="file" class="form-control-file" name="uploaded_file")
-            //-     input(type="text" class="form-control" placeholder="Photo name" name="photoName")
-            //-     input(type="submit" value="Upload" class="btn btn-default")
           label(for="geolocation") &nbsp;
             input(v-model="geolocation.lat" id="geoLat" type="text" placeholder="Latitude" required)
             input(v-model="geolocation.lng" id="geoLng" type="text" placeholder="Longitude" required)
 
-          input(type="submit" value="Add Gift")
-        p
-        p(v-if="!user.present")
-          | no gift so far.. :(
-        p(v-else)
-          h4 So far you've presented {{ user.present.length }} gift(s). <br>Please add more. 
-          div(v-for="gift in user.present")
-            li 
-              router-link(:to="`/gifts/${gift._id}`") {{ gift.name }}
-        
-      .col-2
+          input(id='file' type="file" name="avatar" @change="selectImage( $event )")
+          <br>
+          <button name="data" class="button3" @click="sendImage()">Upload</button>
+      .col
         GmapMap(:center="center" :zoom="10" style="width:450px;  height: 100%;" map-style-id="roadmap" :options="mapOptions" ref="mapRef" @click="handleMapClick") 
           GmapMarker(:position="marker.position" :clickable="true" :draggable="true" @drag="handleMarkerDrag" @click="panToMarker")
 </template>
@@ -144,35 +176,18 @@ label {
   display: block;
   margin: 1rem 0;
 }
-
-.box {
-  padding: 1rem;
-  width: 800px;
-  border: 1px solid #c80;
-  background-color: #dd0;
-  border-radius: 0.3rem;
-}
-
 .row-1 {
   height: 50px;
-  // border: 1px solid #c80;
   display: flex;
   flex-grow: 1;
-  background-color: #dd5;
   margin: 2px;
 }
 .row-2 {
-  //border: 1px solid #c80;
   display: flex;
   flex-grow: 1;
-  background-color: #dd5;
   margin: 2px;
 }
-.col-1 {
-  background: #dd5;
-}
 .col-2 {
-  background: #dd5;
   flex-grow: 1;
   padding: 2px;
 }
