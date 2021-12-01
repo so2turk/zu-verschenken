@@ -32,63 +32,43 @@ export default {
 </script>
 
 <template lang="pug">
-  .home
-    .box
-      .div
-        .row-2
-          .col-2
-            UserCard(:user="user" v-if="user")
-        .row-3
-          p The time is: {{ time }}
-          div(v-if="liveStreams.length")
-            h2 Live streams
-            div(v-for="stream in liveStreams")
-              p {{ stream }}
-              button(@click="joinStream(stream)") Join stream
-          button(@click="goLive") Go live
-          div(v-if="currentLiveStream")
-            h3 Live stream
-            .messages
-              .message(v-for="message in liveStreamMessages")
-                p
-                  span {{ message.author }}:&nbsp;
-                  span {{ message.body }}
-            form(@submit="sendMessage")
-              input(type="text" v-model="message")
-              input(type="submit" value="Send message")
+  .ManageProfile(id="page-wrap")
+    .row-2
+      .col-3
+        .photo-box(v-if="!user.photos")
+          | no avatar
+        .photo-box(v-else)
+          img(:src="img" width="190px")
+      .col-pro
+        label Name: {{ user.name }} <br>
+        label Email: {{ user.email }} <br>
+        label Age: {{ 2021-user.birthYear }} <br>
+        label Address: {{ user.address }} <br>
+        label Postcode: {{ user.postcode }} <br>
 </template>
 
-
 <style lang="scss" scoped>
-.row-1 {
-  height: 90%; 
-  width:100%;
-  display:flex;
-  align-items: center;
-  // justify-content: center;
+col-pro{
+  flex-grow: 3;
+  align-self: center;
+  font-size: 22px;
+  align-self: normal;
 }
-.row-1 {
-  height: 50px;
-  border: 1px solid #c80;
+.div{
+  font-size: 15px;
+}
+.grid-wrap {
   display: flex;
-  flex-grow: 1;
-  background-color: #dd5;
-  margin: 2px;
-}
-.row-2 {
-  border: 1px solid #c80;
-  display: flex;
-  flex-grow: 1;
-  background-color: #dd5;
-  margin: 2px;
-}
-.col-1 {
-  background: #dd5;
-}
-.col-2 {
-  background: #dd5;
-  flex-grow: 1;
-  padding: 1px;
-}
-
+    flex-wrap: wrap;
+    justify-content: space-araund;
+    margin-top: 16px;
+  }
+// music {
+//     list-style: lalala;
+// }
+// @counter-style lalala {
+//   system: cyclic;
+//   symbols: "♪" "♫" "♩" "♬";
+//   suffix: " ";
+// }
 </style>
