@@ -25,6 +25,7 @@ export default {
   }
 }
 </script>
+
 <template lang="pug">
   #nav
     .row-1
@@ -34,6 +35,10 @@ export default {
           img(v-else alt="zuV logo" width="100" src="../src/assets/logoBig.png")        
       .col-2
 
+      .col-3
+      .col-4
+        img(v-if="!dark" @click="switchMode()" width="30px" src="../src/assets/dark_moon.svg")
+        img(v-else @click="switchMode()" width="30px" src="../src/assets/bright_moon.png")
     .row-2
       .col-5
         p
@@ -104,22 +109,13 @@ export default {
   box-sizing: border-box;
   font-family: Arial;
 }
-
 a {
   text-decoration: none;
 }
-
 #page-wrap {
   margin: auto;
   max-width: 850px;
   min-height: 100vh;
-}
-
-#nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
 }
 
 .row-1 {
@@ -170,9 +166,9 @@ body {
 }
 .dark-mode {
   --text-color: #eee;
-  --bkg-color: #2b2626;
+  --bkg-color: #312727;
 }
-// system preferences
+//system preferences
 // @media (prefers-color-scheme: dark) {
 //   /* defaults to dark theme */
 //   body {
@@ -187,7 +183,7 @@ body {
 
 body { background: var(--bkg-color); }
 
-h1,
+h1,h2,h3,h4,h5,a,label,.div-1,.div-2,.div-3,div,
 p { color: var(--text-color); }
 
 .middle {
