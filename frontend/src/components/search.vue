@@ -19,9 +19,13 @@ export default {
     ...mapActions(['fetchGifts']),
 
     displayMatches() {
+      if(this.search){
         const regex = new RegExp(this.search, 'gi');
         this.matchArray = this.gifts.filter(gift => gift.name.match(regex) || gift.name.match(regex))
         this.ready = true
+      }else{
+        this.ready = false
+      }
     },
     chooseGift(gift) {
       this.result = gift;
@@ -33,16 +37,10 @@ export default {
 
 <template lang="pug">
   .GiftList
-    p
-    h2 Browse Gifts
-    p
-
     form(class="search-form")
-      input(v-model="search" type="text" class="search" @input="displayMatches()" placeholder="Gift name")
+      input(v-model="search" type="text" class="search" @input="displayMatches()" placeholder="Quick Search")
       ul(v-show="ready" class="suggestions")
         li(v-for="(gift, i) in matchArray" :key="i" @click="chooseGift(gift)" class="suggestion")
           router-link(:to="`/gifts/${gift._id}`") {{ gift.name }}
-    p
-    p  
       
 </template>
