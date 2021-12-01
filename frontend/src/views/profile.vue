@@ -1,12 +1,10 @@
 <script>
-import UserCard from '@/components/user-card.vue'
-import Counter from '@/components/counter.vue'
-
 import { mapActions, mapState } from 'vuex'
+import GiftCard from '@/components/gift-card.vue'
 
 export default {
-  name: 'Profile',
-  components: { Counter, UserCard },
+  name: 'Manage-Profile',
+  components: { GiftCard },
   data() {
     return { 
       file: null,
@@ -14,25 +12,13 @@ export default {
       path: null,
       imgId: null,
       del: null
-    return {
-      users: [],
-      time: new Date(),
-      message: '',
     }
-  },
-  async created() {
-    this.users = await this.fetchUsers()
   },
   methods: {
     ...mapActions(['addAvatar', 'delAvatar']),
     
     selectImage(event){
       this.file = event.target.files[0]
-    ...mapActions(['fetchUsers', 'goLive', 'sendMessageToLiveStream', 'joinStream']),
-    sendMessage(e) {
-      e.preventDefault()
-      this.sendMessageToLiveStream(this.message)
-      this.message = ''
     },
     async sendImage() {
       let formData = new FormData()
@@ -66,13 +52,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['currentLiveStream', 'liveStreams', 'user', 'liveStreamMessages']),
+    ...mapState(['user']),
     img(){
       return this.user.photos.path
     }
   },
 }
 </script>
+
 
 <template lang="pug">
   .ManageProfile(id="page-wrap")
@@ -95,6 +82,17 @@ export default {
         input(type="submit" class="btn btn-default" @click="sendImage()" )
     .row-2(v-else)
       img(width=20 src="../assets/delete.png" @click="delAvatar({ userId: user._id })")
+    <hr/>
+    <br>
+    .div1(id="page-wrap")
+      h3 Your Presents
+      .div(v-if="user.present.length!=0" class="grid-wrap")
+        GiftCard(v-for="gift in user.present" :gift="gift" :key="gift._id")
+      .div(v-else) none so far..
+      h3 Your Gifts
+      .div(v-if="user.acceptThat.length!=0" class="grid-wrap")
+        GiftCard(v-for="gift in user.acceptThat" :gift="gift" :key="gift._id")
+      .div(v-else) none so far..
 </template>
 
 <style lang="scss" scoped>
