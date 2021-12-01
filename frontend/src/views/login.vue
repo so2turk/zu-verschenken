@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template lang="pug">
-.login
+.login(id="page-wrap")
     form(@submit="submitLogin")
       h1 Log in to your account
       label(for="email") Email:&nbsp;
@@ -39,13 +39,21 @@ export default {
       label(for="password") Password:&nbsp;
         input(v-model="password" id="password" type="password" placeholder="Your password" required)
       input(type="submit" value="Log in")
-    div(v-if="backendError") {{ backendError }}
-    div Don't have an account yet? <router-link to="/register">Register</router-link>
+    .div(v-if="backendError") {{ backendError }} 
+    <br>
+    .div-2 Don't have an account yet? 
+      | <router-link to="/register">Register</router-link>
 </template>
 
 <style lang="scss" scoped>
 label {
   display: block;
   margin: 1rem 0;
+}
+.div-2{
+  display: flex;
+  font-size: 18px;
+  flex-direction: columns;
+  align-content:space-between;
 }
 </style>
