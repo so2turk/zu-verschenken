@@ -46,6 +46,8 @@ const userSchema = new mongoose.Schema({
       ref: 'Photo',
       autopopulate: { maxDepth: 1 },
     },
+  
+}, { versionKey: false })
 
 class User {
   async addGift(gift, photo) {
