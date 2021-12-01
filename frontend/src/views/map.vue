@@ -20,7 +20,7 @@ export default ({
           width: 0,
           height: -35
         },
-        maxWidth: 200,
+        maxWidth: 300,
         content: null
       },
     }
@@ -53,17 +53,17 @@ export default ({
     toggleInfo: function(item, key) {
       this.infoPosition = this.getPosition(item);
       this.infoOptions.content =  '<a href="/gifts/' + item.id + '">' + 
-                                    '<div id="iw" class="iw-container">'+     
-                                      '<div class="iw-prev mb-2">'+
-                                        '<img src="' + item.photos +'" alt="">'+
+                                    '<div>'+     
+                                      '<div>'+
+                                        '<img v-if="item.photos[0].path" src="' + item.photos[0].path +'" width="280px" alt="">'+
                                       '</div>'+                               
-                                      '<div class="iw-body">'+                                     
-                                        '<div class="iw-label">'+
-                                          '<h2 class="iw-address">'+
+                                      '<div>'+                                     
+                                        '<div>'+
+                                          '<h2>'+
                                             item.name +
-                                          '</h4>'+
+                                          '</h2>'+
                                         '</div>'+
-                                        '<h4 class="iw-address">'+
+                                        '<h4>'+
                                           item.category +
                                         '</h4>'+
                                       '</div>'+       
@@ -84,8 +84,8 @@ export default ({
 </script>
 
 <template lang="pug">
-  .GoogleMaps()
-    GmapMap(:center="center" :zoom="12" style="width:800px;  height: 800px;" map-style-id="roadmap" :options="mapOptions") 
+  .GoogleMaps(id="page-wrap")
+    GmapMap(:center="center" :zoom="12" style="width:900px;  height: 850px;" map-style-id="roadmap" :options="mapOptions") 
       GmapInfoWindow(:options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false")
       GmapMarker(v-for="(item, key) in giftsGeolocations" :key="key" :position="getPosition(item)" :clickable="true" @click="toggleInfo(item, key)")
 
