@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
+const Comment = require('../models/comment')
 
 const giftSchema = new mongoose.Schema({
   name: {
@@ -13,10 +14,6 @@ const giftSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-  },
-  address: {
-    type: String,
-    required: false,
   },
   geolocation: {
     lat: {
@@ -63,7 +60,8 @@ const giftSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     autopopulate: { maxDepth: 2 },
-    }],
+    }
+  ],
   presentDate: Date,
   acceptDate: Date,
 })
@@ -79,6 +77,27 @@ class Gift {
     if (this.acceptBy.length > 0) return `already taken by ${this.acceptBy}`
     if (timeDiff <= 2) return `${Math.floor(timeDiff)} day(s) passed.. may still be there`
     return `${Math.floor(timeDiff)} day(s) passed.. nobody took it.. probably perished`
+  }
+
+  async delPresent(user){
+    user.present.splice(user.present.findIndex(g => this._id.toString() == g._id.toString()), 1)
+    await user.save()
+  }
+  async delTake(user){
+    user.acceptThat.splice(user.acceptThat.findIndex(g => this._id.toString() == g._id.toString()), 1)
+
+    await user.save()
+  }
+  async delInterest(user){
+    user.interestIn.splice(user.interestIn.findIndex(g => g._id.toString() == this._id.toString()), 1)
+
+    await user.save()
+  }
+  async delComment(comment){
+    comment.user.comments.splice(comment.user.comments.findIndex(c => comment._id.toString() == c._id.toString()), 1)
+
+    await comment.user.save()
+    await Comment.findByIdAndDelete(comment._id)
   }
 }
 
