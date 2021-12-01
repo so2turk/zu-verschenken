@@ -134,27 +134,34 @@ router.get('/initialize', async (req, res) => {
   })
   await ceyhan.setPassword('lol')
   await ceyhan.save()
-
+  
+  const photo1 = await Photo.create({ 
+    filename: 'Old Table', 
+    path: `https://i.imgur.com/8zHQNPD.jpeg` 
+  });
   const oldTable = await Gift.create({
-    name: 'old table',
-    category: 'furniture',
-    address: 'Kreuzberg',
+    name: 'Old Table',
+    category: 'Furniture',
     geolocation: { lat: 52.489251391027786, lng: 13.39262301870654 },
-    location: 'outside',
+    location: 'Outside',
     description: 'in good condition, few scratches',
-    // photos: ['topLeft', 'bottomLeft'],
+    photos: [photo1],
   })
-  await serhat.addGift(oldTable)
+  await serhat.addGift(oldTable, photo1)
+
+  const photo2 = await Photo.create({ 
+    filename: 'Old Mac', 
+    path: `https://i.imgur.com/59eOt.jpeg` 
+  });
   const oldMac = await Gift.create({
-    name: 'used mac',
-    category: 'electronics',
-    address: 'schoneberg haubtstr.',
+    name: 'Used Mac',
+    category: 'Electronics',
     geolocation: { lat: 52.499251391027786, lng: 13.39762301870654 },
     location: 'inside',
     description: 'better than nothing',
-    // photos: ['keyboard', 'screen'],
+    photos: [photo2],
   })
-  await armagan.addGift(oldMac)
+  await armagan.addGift(oldMac, photo2)
   await serhat.showInterest(oldMac)
   const comment1 = await Comment.create({
     text: 'is there a ketchup on space button?',
@@ -166,26 +173,32 @@ router.get('/initialize', async (req, res) => {
     text: "don't you have chairs?",
   })
   await armagan.postComment(oldTable, comment2)
+  const photo3 = await Photo.create({ 
+    filename: 'Limas Baby Carrier', 
+    path: `https://i.imgur.com/YQaUS2x.jpeg` 
+  });
   const babyTrage = await Gift.create({
-    name: 'limas baby trage',
-    category: 'child-baby',
-    address: 'Rudow',
+    name: 'Limas Baby Trage',
+    category: 'Child-Baby',
     geolocation: { lat: 52.479251391027786, lng: 13.38262301870654 },
-    location: 'inside',
+    location: 'Inside',
     description: 'like a new one',
-    // photos: ['trage'],
+    photos: [photo3],
   })
-  await serhat.addGift(babyTrage)
+  await serhat.addGift(babyTrage, photo3)
+  const photo4 = await Photo.create({ 
+    filename: 'back pack', 
+    path: `https://i.imgur.com/p3tvTzP.jpeg` 
+  });
   const backPack = await Gift.create({
-    name: 'best backpack',
-    category: 'stuff',
-    address: 'Mitte',
+    name: 'Best Backpack',
+    category: 'Others',
     geolocation: { lat: 52.489251391027786, lng: 13.39262301870654 },
-    location: 'outside',
+    location: 'Outside',
     description: 'need small repairment',
-    // photos: [''],
+    photos: [photo4],
   })
-  await desire.addGift(backPack)
+  await desire.addGift(backPack, photo4)
   await neslihan.showInterest(backPack)
   const comment3 = await Comment.create({
     text: 'please keep it.. i will take it..',
@@ -205,26 +218,32 @@ router.get('/initialize', async (req, res) => {
     text: 'yeah.. sure.. if u want!',
   })
   await serhat.postComment(oldTable, comment6)
+  const photo5 = await Photo.create({ 
+    filename: 'ikea lamp', 
+    path: `https://i.imgur.com/6nwaem9.jpeg` 
+  });
   const lamp = await Gift.create({
-    name: 'ikea lamp',
-    category: 'living-area',
-    address: 'Bergman Str.',
+    name: 'Ikea Lamp',
+    category: 'Living-Area',
     geolocation: { lat: 52.469251391027786, lng: 13.37262301870654 },
-    location: 'outside',
+    location: 'Outside',
     description: 'nothing fancy',
-    // photos: [],
+    photos: [photo5],
   })
-  await selman.addGift(lamp)
+  await selman.addGift(lamp, photo5)
+  const photo6 = await Photo.create({ 
+    filename: 'toys', 
+    path: `https://i.imgur.com/XQK6XYA.jpeg` 
+  });
   const toys = await Gift.create({
-    name: 'first year toys',
-    category: 'child-baby',
-    address: 'Kreuzberg',
+    name: 'First Year Toys',
+    category: 'Child-Baby',
     geolocation: { lat: 52.459251391027786, lng: 13.39262301870654 },
-    location: 'outside',
+    location: 'Outside',
     description: 'never used',
-    // photos: ['toys'],
+    photos: [photo6],
   })
-  await dilek.addGift(toys)
+  await dilek.addGift(toys, photo6)
   await gokce.showInterest(toys)
   const comment7 = await Comment.create({
     text: 'they are so cute',
@@ -236,16 +255,19 @@ router.get('/initialize', async (req, res) => {
     text: "thats exactly what i'm looking for",
   })
   await serhat.postComment(toys, comment8)
+  const photo7 = await Photo.create({ 
+    filename: 'painting', 
+    path: `https://i.imgur.com/MRhYAHD.png` 
+  });
   const painting = await Gift.create({
-    name: 'landscape painting',
-    category: 'living-area',
-    address: 'Mitte',
+    name: 'Landscape Painting',
+    category: 'Living-Area',
     geolocation: { lat: 52.449251391027786, lng: 13.36262301870654 },
-    location: 'outside',
+    location: 'Outside',
     description: 'maybe a bit dusty',
-    // photos: ['painting1', 'painting2'],
+    photos: [photo7],
   })
-  await fatma.addGift(painting)
+  await fatma.addGift(painting, photo7)
   await serhat.accept(backPack)
   await serhat.accept(toys)
   await ceyhan.accept(painting)
