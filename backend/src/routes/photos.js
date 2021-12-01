@@ -9,20 +9,20 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    // cb(null, './uploads/');
-    cb(null, path.resolve(__dirname, './uploads'))
+    //cb(null, './public');
+    cb(null, path.resolve(__dirname, '../assets'))
   },
-  filename: (req, file, cb) => cb(null, new Date().toISOString().replace(/[-T:\.Z]/g, "") + file.originalname),
+  filename: (req, file, cb) => cb(null, file.originalname),
 });
 
 const fileFilter = (req, file, cb) => {
-  // reject a file
+  // reject a file    ----   image/png, image/jpeg, image/gif, image/svg+xml
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
   } else {
     cb(null, false);
-  }
-};
+  }  
+};  
 
 const upload = multer({
   storage: storage,
