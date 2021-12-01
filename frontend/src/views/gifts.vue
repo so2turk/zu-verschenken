@@ -19,6 +19,16 @@ export default {
 
 <template lang="pug">
   .Gifts
-    h1 Gifts
-    gift-card(v-for="gift in gifts" :gift="gift" :key="gift._id")
+    .div(id="page-wrap")
+      .div(class="grid-wrap")
+        gift-card(v-for="gift in gifts.slice().reverse()" :gift="gift" :key="gift._id")
 </template>
+
+<style scoped>
+  .grid-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-araund;
+      margin-top: 16px;
+    }
+</style>
