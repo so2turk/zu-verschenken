@@ -1,7 +1,6 @@
 const express = require('express')
 
 const router = express.Router()
-const axios = require('axios')
 
 const User = require('../models/user')
 const Gift = require('../models/gift')
@@ -278,7 +277,6 @@ router.get('/initialize', async (req, res) => {
   await anonymous.accept(lamp)
   await selman.accept(babyTrage)
 
-  console.log(serhat)
   res.sendStatus(200)
 })
 
@@ -348,11 +346,9 @@ router.post('/addGift', async (req, res) => {
   const giftTocreate = await Gift.create({
     name: req.body.name,
     category: req.body.category,
-    address: req.body.address,
     geolocation: req.body.geolocation,
     location: req.body.location,
     description: req.body.description,
-    // photos: req.body.photos,
   })
   await req.user.addGift(giftTocreate)
   res.status(200).send()
