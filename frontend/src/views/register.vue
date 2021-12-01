@@ -40,17 +40,15 @@ export default {
 </script>
 
 <template lang="pug">
-.register
+.register(id="page-wrap")
     form( @submit="submitLogin")
       h1 Create a new account
       label(for="name") Name:&nbsp;
         input(v-model="name" id="name" type="text" placeholder="Your name" required)
       label(for="birthYear") Birth Year:&nbsp;
-        input(v-model="birthYear" id="age" type="number" placeholder="Your age" required)
+        input(v-model="birthYear" id="birthYear" type="number" placeholder="Your Birth Year" required)
       label(for="email") Email:&nbsp;
         input(v-model="email" id="email" type="email" placeholder="Your email" required)
-      label(for="address") Address:&nbsp;
-        input(v-model="address" id="address" type="text" placeholder="Your address" required)
       label(for="postcode") Postcode:&nbsp;
         input(v-model="postcode" id="postcode" type="number" placeholder="Your postcode" required)
       label(for="password") Password:&nbsp;
