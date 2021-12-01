@@ -354,4 +354,39 @@ router.post('/addGift', async (req, res) => {
   res.status(200).send()
 })
 
+router.post('/addGiftPhoto', async (req, res) => {
+  if(!req.user) return res.sendStatus(401)
+  const photo = await Photo.create({
+    filename: req.body.filename,
+    path: req.body.path,
+    imgId: req.body.imgId,
+    del: req.body.del
+  })
+  const gift = await Gift.create({
+    name: req.body.name,
+    category: req.body.category,
+    geolocation: req.body.geolocation,
+    location: req.body.location,
+    description: req.body.description,
+  })
+  await req.user.addGiftPhoto(gift, photo)
+  res.status(200).send()
+})
+
+router.post('/take', async (req, res) => {
+  const user = await User.findById(req.body.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.accept(gift)
+  res.sendStatus(200)
+})
+
+router.post('/leave', async (req, res) => {
+  const user = await User.findById(req.body.userId)
+  const gift = await Gift.findById(req.body.giftId)
+
+  await user.leave(gift)
+  res.sendStatus(200)
+})
+
 module.exports = router
