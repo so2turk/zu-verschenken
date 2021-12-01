@@ -28,8 +28,11 @@ export default {
 <template lang="pug">
   .InterestedIn(v-if="gift")
     .div
-      p
-        img(v-if="interested" @click="unInterest({ giftId: gift._id }); numOfInterested--; interested = !interested" width=20 src="../assets/heart-green.png") 
-        img(v-else @click="showInterest({ giftId: gift._id }); numOfInterested++; interested = !interested" width=20 src="../assets/heart-black.png")
+      .div(v-if="user")
+        img(v-if="interested" @click="unInterest({ giftId: gift._id }); numOfInterested--; interested = !interested" width=22 src="../assets/heart-green.png") 
+        img(v-else @click="showInterest({ giftId: gift._id }); numOfInterested++; interested = !interested" width=22 src="../assets/heart.png")
+        |  {{ numOfInterested }}
+      .div(v-else)
+        img(width=22 src="../assets/heart.png")
         |  {{ numOfInterested }}
 </template>
