@@ -10,14 +10,23 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(["user"])
-  }
+    ...mapState(["user"]),
+
+    img(){
+      return this.gift.photos[0].path
+    }
+  },
 }
 </script>
 
 <template lang="pug">
 .box
   .div(v-if="gift" class="gift-item")
+    .div(v-if="!gift.photos.length")
+      img(v-if="dark" alt="zuV logo" width="50" src="../assets/logoBig-b.png")
+      img(v-else alt="zuV logo" width="50" src="../assets/logoBig.png")
+    .div(v-else)
+      img(:src="img" width="350px")
     p(class="gift-name") {{ gift.name }}
     router-link(v-bind:to="'/gifts/' + gift._id")
       <button class="button">View Details</button>
