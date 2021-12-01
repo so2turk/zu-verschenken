@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   birthYear: Number,
-  address: String,
   present: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -41,23 +40,35 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
-  photos: [
+  photos: 
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Photo',
       autopopulate: { maxDepth: 1 },
     },
-  ],
-})
 
 class User {
-  async addGift(gift) {
-    this.present.push(gift)
+  async addGift(gift, photo) {
     gift.presentDate = new Date()
     gift.presentBy = this
+    this.present.push(gift)
 
     await this.save()
     await gift.save()
+  }
+
+  async addGiftPhoto(gift, photo) {
+    gift.presentDate = new Date()
+    gift.presentBy = this
+    gift.photos.push(photo)
+    this.present.push(gift)
+
+    photo.user.push(this);
+    photo.gift.push(gift);
+
+    await this.save()
+    await gift.save()
+    await photo.save()
   }
   
   async showInterest(gift) {
@@ -97,18 +108,12 @@ class User {
     await gift.save()
   }
 
-  async addAvatar(avatar) {
-    this.photos.push(avatar);
-
-    await this.save();
-  }
-
-  async addPhoto(photo, gift) {
-    this.photos.push(photo);
-    gift.photos.push(photo)
-
-    await this.save();
-    await gift.save();
+  async leave(gift) {
+    this.acceptThat.splice(this.acceptThat.findIndex(g => g._id == gift._id), 1)
+    gift.acceptBy.splice(gift.acceptBy.findIndex(u => u._id == this._id), 1)
+    
+    await this.save()
+    await gift.save()
   }
 }
 
