@@ -4,6 +4,7 @@ const path = require('path');
 const User = require('../models/user');
 const Gift = require('../models/gift');
 const Photo = require('../models/photo');
+const axios = require('axios')
 
 const router = express.Router();
 
@@ -32,14 +33,42 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+router.get('/:imageId', async (req, res) => {
+  const image = await Photo.findById(req.params.imageId)
+
+  if (photo) res.send(image)
+  else res.sendStatus(404)
+})
+
 /* POST a avatar */
-router.post('/addAvatar', upload.single('avatar'), async (req, res) => {
-  if(!req.file) return res.sendStatus(401)
-  console.log(req.file)
-  const avatar = await Photo.create({ filename: `${req.file.filename}`, path: `${req.file.path}` });
-  // await req.user.addAvatar(avatar)
-  res.send(avatar);
-});
+router.post('/addAvatar', async (req, res) => {
+  if(!req.user) return res.sendStatus(401)
+  const avatar = await Photo.create({
+    filename: req.body.filename,
+    path: req.body.path,
+    imgId: req.body.imgId,
+    del: req.body.del
+  })
+  await avatar.addAvatar(req.user)
+  res.status(200).send()
+})
+
+router.post('/delAvatar', async (req, res) => {
+  const user = await User.findById(req.body.userId)
+  console.log(user.photos._id, user.photos)
+  const ID = ''
+  if(user.photos.del) {
+    await axios.delete("https://api.imgur.com/3/image/" + user.photos.del,{
+    method: "delete", headers: { Authorization: `Client-ID ${ID}` },
+    })
+  }
+  
+  await Photo.findByIdAndDelete(user.photos._id)
+  user.photos = {}
+  console.log("lololol", user.photos)
+
+  res.status(200).send()
+})
 
 /* POST a photos */
 router.post('/:id/photos', upload.single('photo'), async (req, res) => {
