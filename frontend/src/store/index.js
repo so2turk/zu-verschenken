@@ -132,6 +132,14 @@ const store = new Vuex.Store({
     async delAvatar(store, data) {
       return axios.post('/api/photos/delAvatar', data)
     },
+    async take(store, data) {
+      return axios.post('/api/users/take', data)
+    },
+    async delGift(store, data) {
+      return axios.post('/api/gifts/delGift', data)
+    },
+    async leave(store, data) {
+      return axios.post('/api/users/leave', data)
     },
   },
   modules: {},
