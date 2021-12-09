@@ -17,6 +17,7 @@ const mutations = {
   SET_LIVE_STREAM: 'set live stream',
   ADD_LIVE_STREAM: 'add live stream',
   ADD_MESSAGE_TO_LIVE_STREAM: 'add message to live stream',
+  DARK_MODE: 'dark mode',
 }
 
 const store = new Vuex.Store({
@@ -26,6 +27,7 @@ const store = new Vuex.Store({
     currentLiveStream: null,
     liveStreams: [],
     liveStreamMessages: [],
+    dark: false,
   },
   mutations: {
     [mutations.INCREMENT_COUNT](state) {
@@ -42,6 +44,9 @@ const store = new Vuex.Store({
     },
     [mutations.ADD_MESSAGE_TO_LIVE_STREAM](state, message) {
       state.liveStreamMessages.push(message)
+    },
+    [mutations.DARK_MODE](state) {
+      state.dark = !state.dark
     },
   },
   actions: {
@@ -103,14 +108,38 @@ const store = new Vuex.Store({
       socket.emit('join stream', stream)
       commit(mutations.SET_LIVE_STREAM, stream)
     },
-    async createComment(store, text, user, gift, createdAt) {
-      axios.post('/api/comments/', text, user, gift, createdAt)
+    async createComment(store, data) {
+      return axios.post('/api/comments/', data)
     },
-    async interestedIn(store, userId, giftId) {
-      axios.post('/api/users/interested/', userId, giftId)
+    async showInterest(store, data) {
+      return axios.post('/api/users/interested', data)
     },
-    async interestedOut(store, userId, giftId) {
-      axios.post('/api/users/unInterested/', userId, giftId)
+    async unInterest(store, data) {
+      return axios.delete('/api/users/unInterested/' + data.giftId)
+    },
+    async addGift(store, data) {
+      return axios.post('/api/users/addGift', data)
+    },
+    async addGiftPhoto(store, data) {
+      return axios.post('/api/users/addGiftPhoto', data)
+    },
+    changeMode(Store) {
+      Store.commit(mutations.DARK_MODE)
+    },
+    async addAvatar(store, data) {
+      return axios.post('/api/photos/addAvatar', data)
+    },
+    async delAvatar(store, data) {
+      return axios.post('/api/photos/delAvatar', data)
+    },
+    async take(store, data) {
+      return axios.post('/api/users/take', data)
+    },
+    async delGift(store, data) {
+      return axios.post('/api/gifts/delGift', data)
+    },
+    async leave(store, data) {
+      return axios.post('/api/users/leave', data)
     },
   },
   modules: {},
