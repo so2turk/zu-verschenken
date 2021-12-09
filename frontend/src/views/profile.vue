@@ -1,10 +1,11 @@
 <script>
+import UserCard from '@/components/user-card.vue'
 import Counter from '@/components/counter.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Profile',
-  components: { Counter },
+  components: { Counter, UserCard },
   data() {
     return {
       users: [],
@@ -33,9 +34,9 @@ export default {
   .home
     h1 {{ user.name }}
     p The time is: {{ time }}
-    h2 Users
-    div(v-for="user in users")
-      router-link(:to="`/users/${user._id}`") {{ user.name }}
+    p
+    UserCard(:user="user" v-if="user")
+    p
     div(v-if="liveStreams.length")
       h2 Live streams
       div(v-for="stream in liveStreams")

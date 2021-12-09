@@ -4,7 +4,6 @@ const autopopulate = require('mongoose-autopopulate')
 const giftSchema = new mongoose.Schema({
   name: {
     type: String,
-    unique: true,
     required: true,
   },
   category: {
@@ -36,14 +35,11 @@ const giftSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 2 },
     },
   ],
-  commentBy: [
+  comments: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        autopopulate: { maxDepth: 2 },
-      },
-      comment: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Comment',
+      autopopulate: { maxDepth: 2 },
     },
   ],
   acceptBy: {

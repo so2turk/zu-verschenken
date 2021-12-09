@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template lang="pug">
-.GiftCard
+.box
   .div
     .row-1
       h2 {{ gift.name }}
@@ -32,11 +32,7 @@ export default {
         p(v-if="!gift.interestBy.length")
           | interested by: -
         p(v-else)
-          | interested by: {{ gift.interestBy.map(user => user.name).join('\n') }}
-        p(v-if="!gift.commentBy.length")
-          | comment by: -
-        p(v-else)
-          | comment by: <br> {{ gift.commentBy.map(user => `\* ${user.comentingUser.name}: ${user.comment}`).join('\n') }}
+          | interested by: {{ gift.interestBy.map(user => user.name).join(';\n') }}
         p status: {{ gift.giftStatus }}
         p accepted by: {{ gift.acceptBy.name}} on {{ gift.acceptDate }}
 </template>

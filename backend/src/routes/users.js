@@ -8,6 +8,7 @@ const downloadImage = require('../lib/download-image')
 const User = require('../models/user')
 const Gift = require('../models/gift')
 const Photo = require('../models/photo')
+const Comment = require('../models/comment')
 
 /* GET users listing. */
 router.get('/', async (req, res) => {
@@ -181,10 +182,16 @@ router.get('/initialize', async (req, res) => {
   })
   await armagan.addGift(oldMac)
   await serhat.showInterest(oldMac)
-  await serhat.makeCommentOn(oldMac, 'is there a ketchup on space button?')
+  const comment1 = await Comment.create({
+    text: 'is there a ketchup on space button?',
+  })
+  await serhat.postComment(oldMac, comment1)
   await neslihan.showInterest(oldMac)
   await armagan.showInterest(oldTable)
-  await armagan.makeCommentOn(oldTable, "don't you have chairs?")
+  const comment2 = await Comment.create({
+    text: "don't you have chairs?",
+  })
+  await armagan.postComment(oldTable, comment2)
   const babyTrage = await Gift.create({
     name: 'limas baby trage',
     category: 'child-baby',
@@ -204,12 +211,24 @@ router.get('/initialize', async (req, res) => {
   })
   await desire.addGift(backPack)
   await neslihan.showInterest(backPack)
-  await neslihan.makeCommentOn(backPack, 'please keep it.. i will take it..')
-  await desire.makeCommentOn(oldTable, 'if there will be chairs gonna take it..')
+  const comment3 = await Comment.create({
+    text: 'please keep it.. i will take it..',
+  })
+  await neslihan.postComment(backPack, comment3)
+  const comment4 = await Comment.create({
+    text: 'if there will be chairs gonna take it..',
+  })
+  await desire.postComment(oldTable, comment4)
   await neslihan.accept(oldMac)
   await armagan.accept(oldTable)
-  await serhat.makeCommentOn(backPack, 'sorry.. i am close.. taking it')
-  await serhat.makeCommentOn(oldTable, 'yeah.. sure.. if u want!')
+  const comment5 = await Comment.create({
+    text: 'sorry.. i am close.. taking it',
+  })
+  await serhat.postComment(backPack, comment5)
+  const comment6 = await Comment.create({
+    text: 'yeah.. sure.. if u want!',
+  })
+  await serhat.postComment(oldTable, comment6)
   const lamp = await Gift.create({
     name: 'ikea lamp',
     category: 'living-area',
@@ -229,10 +248,16 @@ router.get('/initialize', async (req, res) => {
   })
   await dilek.addGift(toys)
   await gokce.showInterest(toys)
-  await gokce.makeCommentOn(toys, 'they are so cute')
+  const comment7 = await Comment.create({
+    text: 'they are so cute',
+  })
+  await gokce.postComment(toys, comment7)
   await bernard.showInterest(toys)
   await serhat.showInterest(toys)
-  await serhat.makeCommentOn(toys, "thats exactly what i'm looking for")
+  const comment8 = await Comment.create({
+    text: "thats exactly what i'm looking for",
+  })
+  await serhat.postComment(toys, comment8)
   const painting = await Gift.create({
     name: 'landscape painting',
     category: 'living-area',
@@ -245,8 +270,12 @@ router.get('/initialize', async (req, res) => {
   await serhat.accept(backPack)
   await serhat.accept(toys)
   await ceyhan.accept(painting)
-  await ceyhan.makeCommentOn(painting, 'beautiful.. thank u..')
-  anonymous.accept(lamp)
+  const comment9 = await Comment.create({
+    text: "beautiful.. thank u..",
+  })
+  await ceyhan.postComment(painting, comment9)
+  await anonymous.accept(lamp)
+  await selman.accept(babyTrage)
 
   console.log(serhat)
   res.sendStatus(200)
@@ -279,7 +308,6 @@ router.post('/:userId/commented', async (req, res) => {
   const user = await User.findById(req.params.userId)
   const gift = await Gift.findById(req.body.giftId)
 
-  await user.makeCommentOn(gift, req.body.comment)
   res.sendStatus(200)
 })
 
@@ -294,6 +322,22 @@ router.post('/:userId/took', async (req, res) => {
 router.get('/:userId/json', async (req, res) => {
   const user = await User.findById(req.params.userId)
   res.send(user)
+})
+
+router.post('/interested', async (req, res) => {
+  const user1 = await User.findById(req.body.userId)
+  const gift1 = await Gift.findById(req.body.giftId)
+
+  await user1.showInterest(gift1)
+  res.sendStatus(200)
+})
+
+router.post('/unInterested', async (req, res) => {
+  const user1 = await User.findById(req.body.userId)
+  const gift1 = await Gift.findById(req.body.giftId)
+
+  await user1.deleteInterest(gift1)
+  res.status(200).send()
 })
 
 module.exports = router

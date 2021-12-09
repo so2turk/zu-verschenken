@@ -4,9 +4,12 @@ import axios from 'axios'
 
 import io from 'socket.io-client'
 
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
+axios.defaults.withCredentials = true
+
 Vue.use(Vuex)
 
-const socket = io()
+const socket = io(process.env.VUE_APP_BASE_URL)
 
 const mutations = {
   INCREMENT_COUNT: 'incrementCount',
@@ -99,6 +102,15 @@ const store = new Vuex.Store({
     async joinStream({ state, commit }, stream) {
       socket.emit('join stream', stream)
       commit(mutations.SET_LIVE_STREAM, stream)
+    },
+    async createComment(store, text, user, gift, createdAt) {
+      axios.post('/api/comments/', text, user, gift, createdAt)
+    },
+    async interestedIn(store, userId, giftId) {
+      axios.post('/api/users/interested/', userId, giftId)
+    },
+    async interestedOut(store, userId, giftId) {
+      axios.post('/api/users/unInterested/', userId, giftId)
     },
   },
   modules: {},
