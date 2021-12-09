@@ -62,6 +62,7 @@ const giftSchema = new mongoose.Schema({
     autopopulate: { maxDepth: 2 },
     }
   ],
+
   presentDate: Date,
   acceptDate: Date,
 }, { versionKey: false })

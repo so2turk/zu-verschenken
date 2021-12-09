@@ -48,3 +48,4 @@ export default {
             .gift(v-for="comment in user.comments")
               router-link(:to="`/gifts/${comment.gift._id}`") {{ comment.gift.name }}
 </template>
+
